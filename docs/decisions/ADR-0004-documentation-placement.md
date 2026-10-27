@@ -19,7 +19,7 @@ A document lives with whoever is responsible for keeping it true.
 
 | Location | Holds |
 |---|---|
-| `nuxt-layers/platform-architecture` | Ecosystem-wide principles and invariants; cross-cutting standards; Architecture Decision Records; the capability catalogue as an index of one line per capability |
+| `nuxt-layers/architecture-rules` | Ecosystem-wide principles and invariants; cross-cutting standards; Architecture Decision Records; the capability catalogue as an index of one line per capability |
 | Each capability repository, under `docs/` | Its `CONTRACT.md` and longer contract, data model, threat model and control register, `PLAN.md`, and the processes it owns |
 | A suite's integration repository, e.g. `nuxt-layers/iam-integration`, under `docs/` | The suite's architecture and the processes that span several of its capabilities |
 

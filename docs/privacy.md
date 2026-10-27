@@ -6,7 +6,7 @@
 
 ## 1. Principle
 
-Privacy and data protection are part of the platform architecture. Compliance MUST NOT depend only on a cookie banner or privacy-policy page.
+Privacy and data protection are part of the architecture rules. Compliance MUST NOT depend only on a cookie banner or privacy-policy page.
 
 ## 2. Scope
 
