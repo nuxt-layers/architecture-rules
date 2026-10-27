@@ -1,4 +1,4 @@
-# Nuxt Layers Platform Architecture
+# Nuxt Layers Architecture Rules
 
 > **In short:** the rules every `nuxt-layers` capability and application follows: principles, cross-cutting standards and Architecture Decision Records. A capability's own detail lives in its own repository.
 
