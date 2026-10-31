@@ -6,7 +6,7 @@
 **Amended:** 2026-10-25: documents that stay true without upkeep; one file for external links, one for plans  
 **Amended:** 2026-10-26: `CONTRACT.md` listed with the other files; `RESOURCES.md` and `PLAN.md` at the repository root; the documentation style standard folded in
 
-> **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Historical reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
+> **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Verified external reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
 
 ## Why
 
@@ -38,7 +38,7 @@ Keeping versions, pins and status up to date across many files costs time and to
 | File | Holds | Never holds |
 |---|---|---|
 | `README.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md` | What the repository is and how to work with it, in general terms. Links only to the repository's own documents | Version numbers, release names, pinned commits, status, plans or links outside the repository |
-| `RESOURCES.md` | Every external architectural document relied on, one row each, identifying the revision reviewed (tag or commit). Live software dependencies follow ADR-0008. Apart from `CONTRACT.md`'s own pins, this is the only place external links and versions appear | Anything else |
+| `RESOURCES.md` | Every accessible external architectural document relied on, one row each, identifying the verified revision reviewed (tag or commit). Live software dependencies follow ADR-0008. Apart from `CONTRACT.md`'s own pins, this is the only place external links and versions appear | Anything else |
 | `PLAN.md` | Every plan and its status: what is done, in progress and next, replacing roadmaps and registers. Present only while the repository has planned work: the architecture repository has none, as plans belong to each capability and to the applications driving the order of work | Decisions' reasoning, which stays in the documents it belongs to |
 | `CHANGELOG.md` | Major changes, newest first, with dates; formal release versions resume when the release lifecycle is approved | Plans, status, reasoning or links |
 | `CONTRACT.md` | A capability's one-page offer to hosts and other layers ([ADR-0012](ADR-0012-trivial-composition.md) §6), with its development status and public interface; a suite describes the members it composes without release pins during development | Any other repository's versions, plans or links; what it needs from elsewhere is named through `RESOURCES.md` |
@@ -55,4 +55,4 @@ New documents follow it from the start. Existing documents, and each repository'
 |---|---|
 | Faster reading and review | Rewriting older documents over time |
 | Fewer misreadings by people and AI | Editing for brevity takes effort |
-| A historical reference update touches one file, not many | Readers follow one more step to reach an external document |
+| A verified reference update touches one file, not many | Readers follow one more step to reach an external document |
