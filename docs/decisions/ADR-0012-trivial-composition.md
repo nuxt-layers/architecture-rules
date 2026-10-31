@@ -79,7 +79,7 @@ Every capability has `CONTRACT.md` at its root: what a host needs and nothing el
 | Headless surface | What any screen must still do (ADR-0009) |
 | You will hit this | Rules a host would otherwise discover by failing: identifier formats, name patterns, what needs a second person or step-up |
 
-The capability's longer contract stays for its own developers. When the two disagree, the code and the longer contract are right and `CONTRACT.md` is a bug. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
+The capability's longer contract stays for its own developers. When they disagree, the accepted ADRs and normative capability specification govern; the documents and implementation must be reconciled before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
 
 ## Adopting it
 
