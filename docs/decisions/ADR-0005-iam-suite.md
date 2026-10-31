@@ -9,7 +9,7 @@
 
 ## Why
 
-Authentication and Authorisation are implemented; Identity is next ([ADR-0003](ADR-0003-group-model-and-identity-first.md)). Their boundaries were drawn one capability at a time. Before Identity is designed, the capabilities that together answer "who is this, what are they a member of, and what may they do?" need one agreed set of boundaries, one place for the processes that span them, and a small number of suite-wide invariants that no single member can enforce alone.
+The capabilities that together answer "who is this, what are they a member of, and what may they do?" need agreed boundaries, one place for cross-capability processes, and suite-wide invariants that no single member can enforce alone.
 
 The earlier catalogue placed "baseline identity/profile information" in Identity. That would put personal data beside the membership graph that every decision reads, widening the data most capabilities must handle.
 
@@ -17,7 +17,7 @@ The earlier catalogue placed "baseline identity/profile information" in Identity
 
 ### 1. Members
 
-The Identity and Access Management (IAM) suite has five members. Each is an independent capability repository; none imports another.
+The Identity and Access Management (IAM) suite has five members. The four foundational capabilities remain independently owned and do not import one another; `iam-integration` composes their public contracts.
 
 | Member | Owns | Never owns |
 |---|---|---|
