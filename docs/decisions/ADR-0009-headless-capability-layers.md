@@ -4,7 +4,7 @@
 **Date:** 2026-10-21  
 **Amended and accepted:** 2026-10-22: no screen exceptions for sign-in or step-up; client helpers and protocol endpoints named; wording keys, theme authority and person names placed; screens removed only once replaced  
 **Amended:** 2026-10-22: `ui` offers styled, customisable components; kits are named `<capability>-ui`; composition kits and the host's part defined  
-**Amended:** 2026-10-25: a layer's core stays headless, but the layer may ship an optional presentation part for its own screens; kits become optional; released layers keep their screens
+**Amended:** 2026-10-25: a layer's core stays headless, but the layer may ship an optional presentation part for its own screens; kits become optional; existing layers retain their screens
 
 > **In short:** a capability layer's core does the work and never depends on screens. A layer may also ship its own screens as an optional, separable part, drawn only with Theme Manager's vocabulary, which a host uses, overrides or switches off. Whoever composes it decides.
 
@@ -54,7 +54,7 @@ Theme Manager is headless too. Its themes, tokens, contrast checks and preferenc
 | **Composition kits** | One journey across several capabilities, such as managing users; created when a second application needs it. No data or services of their own |
 | **Applications** | Compose capabilities and use, override or replace their screens; own everything specific to the product, and every screen no layer offers |
 
-Capability kits (`<capability>-ui`) are no longer required. One is created only if a capability's screens must be released apart from the capability, and the case is argued in the layer's contract.
+Capability kits (`<capability>-ui`) are no longer required. One is created only if a capability's screens must be maintained separately from the capability, and the case is argued in the layer's contract.
 
 Every screen, wherever it lives:
 
@@ -74,16 +74,16 @@ Presentation never holds a guarantee.
 
 | Layer | Adopts it |
 |---|---|
-| New, or before 1.0 | A headless core from the start; a presentation part only where the layer's screens are standard. `publisher` stays fully headless: its editing comes from `content-editor` through its editor slot |
-| Released, with screens | Keeps them as its presentation part. If any screen breaks a rule above, it is fixed in a minor release; nothing is deprecated for being a screen |
+| New capabilities | A headless core from the start; a presentation part only where the capability's screens are standard. `publisher` stays fully headless: its editing comes from `content-editor` through its editor slot |
+| Existing capabilities with screens | Keep them as their presentation part. Fix nonconforming screens through the normal pull-request and consumer acceptance workflow (ADR-0008); no screen is removed merely because it is a screen |
 
-The headless migration plan ([Resources](../../RESOURCES.md): *Headless migration v0.1*) is superseded by this amendment, except for `ui`'s first release, which still removes `ui`'s competing tokens and theme handling; that release belongs to `ui`'s own plan.
+The earlier migration-plan approach is superseded by this amendment. Any work to remove `ui`'s competing tokens or theme handling belongs in `ui`'s own repository and development plan.
 
 ## What follows
 
 | Gains | Costs |
 |---|---|
-| A composed application looks and reads as one product, through the shared theme vocabulary | A layer with a presentation part releases for screen fixes as well as for its services |
+| A composed application looks and reads as one product, through the shared theme vocabulary | A layer with a presentation part must maintain and test its screens alongside its services |
 | Standard screens are built and tested once, in the layer, for every application | A layer's screens follow its own layout; an application wanting another draws its own |
 | Applications compose services without competing routes or styles: every presentation part can be moved or switched off | Wording lives in each layer's catalogue, not in one place per application, unless the application overrides it |
 | Any front end can still use a capability: console, website, app or another service | Two places can draw a capability's screens; the contract's *Headless surface* keeps them equally safe |

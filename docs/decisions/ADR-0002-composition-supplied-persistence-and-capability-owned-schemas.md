@@ -70,5 +70,5 @@ Automated tests and CI SHOULD use a disposable local PostgreSQL instance rather 
 ## Guardrails
 
 - A capability's persistence port is documented in its `CONTRACT.md`, including the expected connection type and the migration procedure.
-- Migrations are additive within a release line; destructive schema changes follow the [Layer Standard](../layer-standard.md) §7.
+- Migrations preserve existing data and support safe forward migration. Destructive changes require an explicit migration and recovery plan, with affected consumers tested against current `master` (ADR-0008).
 - Each capability's security tests include a negative test showing it fails closed when its persistence provider is absent.

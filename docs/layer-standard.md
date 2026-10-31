@@ -90,7 +90,7 @@ Each independently developed layer ships `capability.json`, so tooling and hosts
 }
 ```
 
-It names the manifest schema version, the package, its development metadata version, its class (`foundation`, `platform`, `domain`, `presentation` or `library`), what it provides with contract versions, and what it requires with compatible versions and whether each is optional. Later versions may add configuration schemas, events, runtime needs, security metadata and compatibility evidence.
+The sample `version` is development metadata, not a published release or consumer pin. It names the manifest schema version, the package, its development metadata version, its class (`foundation`, `platform`, `domain`, `presentation` or `library`), what it provides with contract versions, and what it requires with compatible versions and whether each is optional. Later versions may add configuration schemas, events, runtime needs, security metadata and compatibility evidence.
 
 ## 5. Testing
 
@@ -113,6 +113,6 @@ Whenever a provider's `master` advances, affected consumers refresh their depend
 
 ## 7. Versioning
 
-Formal package releases, release tags and compatibility obligations to superseded development revisions are suspended until the project owner approves a release lifecycle (ADR-0008). Contract changes remain explicit, documented and tested, even when breaking changes are expected during development.
+Formal package releases, release tags and compatibility obligations to superseded development revisions are suspended until the project owner approves a release lifecycle (ADR-0008). Contract changes remain explicit, documented and tested, even when breaking changes are expected during development. Contract-version fields describe interface compatibility, not repository dependency pinning; they must be updated when the interface changes.
 
 Capability and contract metadata may retain schema versions required by tooling; such fields do not imply a formal package-release lifecycle. Consumer compatibility is established against current upstream `master`, not a historic tag.

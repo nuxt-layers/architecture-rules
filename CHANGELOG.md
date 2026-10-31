@@ -4,6 +4,9 @@ Major changes, newest first. This repository has no releases; each entry is date
 
 ## 2026-10-31
 
+- Reconciled remaining documentation contradictions: release-era instructions, inaccessible historical references, contract authority, repository file placement, manifest metadata and continuous integration acceptance.
+
+
 - Removed inaccessible historical document links from `RESOURCES.md` and aligned references and documentation rules with the current accessible repositories.
 
 

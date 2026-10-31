@@ -15,7 +15,7 @@ Independent release tags and delayed composition have imposed unnecessary admini
 During pre-release development:
 
 1. **Current development source.** Every layer and application consumes the latest accepted `master` of its dependencies. Superseded development revisions are not compatibility targets.
-2. **Immediate propagation.** A provider change merged into `master` triggers refresh and acceptance testing in affected consuming layers, integration repositories and applications. Adoption begins immediately; it is complete only when those consumers have passed.
+2. **Immediate propagation.** A provider change merged into `master` triggers refresh and acceptance testing in affected consuming layers, integration repositories and applications. Adoption begins immediately; it is complete only when the affected consumers have resolved their dependencies to the current provider `master` and passed their required checks. Failures remain visible until corrected.
 3. **Fix forward.** Breaking changes found in integration are repaired in affected consumers or, where the provider is defective, in the provider. Do not hold consumers on older development revisions merely to avoid integration work.
 4. **No formal development releases.** New release packages, release tags and release-based dependency pins are suspended until the project owner explicitly approves a release lifecycle. Existing tags and releases remain historical records.
 5. **Independent ownership.** Changes remain focused in the repository that owns them, delivered through protected-branch pull requests. Public contracts, ports and capability boundaries remain mandatory.
@@ -40,7 +40,7 @@ Update dependency declarations, workflows, contracts and consumer harnesses to f
 
 ## Guardrails
 
-- A passing provider CI run does not itself prove consumer compatibility.
+- A passing provider CI run does not itself prove consumer compatibility. Acceptance reports identify each affected consumer, its check result and any outstanding integration failure.
 - No automatic forced pushes, unreviewed merges or weakening of protected branches.
 - Lockfile or tool-generated commit identifiers do not constitute a formal pinning policy.
 - Historical architectural references in `RESOURCES.md` remain revision-specific under ADR-0004 and ADR-0010.

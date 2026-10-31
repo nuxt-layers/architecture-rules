@@ -10,7 +10,7 @@
 
 ## Why
 
-Copy appears everywhere: published articles, a person's bio, a site's notices, a button's label. If each layer chose its own format and safety rules, the same text would behave differently in each place, and one weak spot would put every reader at risk. Copy written into code cannot be changed without a release.
+Copy appears everywhere: published articles, a person's bio, a site's notices, a button's label. If each layer chose its own format and safety rules, the same text would behave differently in each place, and one weak spot would put every reader at risk. Copy written into code cannot be changed without a code change.
 
 Most copy needs no formatting at all. A name or a label is a string, and a standard input edits it perfectly well. Only text that carries formatting, such as emphasis, links, lists or tables, needs a shared format and an editor.
 
@@ -71,18 +71,18 @@ A capability may depend on a `nuxt-layers` library that holds no state, no ports
 | Layer | Adopts it |
 |---|---|
 | `rich-text` | Created from the publisher's existing dialect, with the three profiles added |
-| `publisher` | Uses `rich-text` for formatted fields before its 1.0 release; its own dialect is removed |
+| `publisher` | Uses `rich-text` for formatted fields; removes its own dialect as part of the development integration |
 | `content-editor` | Built on `ui` and `rich-text` as a presentation layer ([ADR-0009](ADR-0009-headless-capability-layers.md)) |
-| Profile and Configuration | Move fields longer than a label to `rich-text` in their next major release, so their contracts break once; plain fields stay as they are |
-| Others | Use `rich-text` for formatted fields in their next major release |
+| Profile and Configuration | Migrate formatted fields to `rich-text` through a reviewed contract change and immediate consumer integration; plain fields stay as they are |
+| Others | Adopt `rich-text` for formatted fields through normal development changes and affected-consumer acceptance testing |
 
 ## What follows
 
 | Gains | Costs |
 |---|---|
-| Formatted text behaves and is protected the same everywhere | Every capability with formatted fields depends on one library, so its releases must be careful |
+| Formatted text behaves and is protected the same everywhere | Every capability with formatted fields depends on one library, so cross-repository compatibility must be tested |
 | Plain fields stay simple: a string and a standard control | Each field must be classed as plain or formatted, and a profile chosen for the formatted ones |
-| Copy changes without a release | Interface wording needs translation resources the application can edit |
+| Content changes without a code change | Interface wording needs translation resources the application can edit |
 | One editor to learn, build and test, used only where it earns its place | `content-editor` must serve a caption and an article equally well |
 
 ## Guardrails

@@ -20,13 +20,13 @@ A document lives with whoever is responsible for keeping it true.
 | Location | Holds |
 |---|---|
 | `nuxt-layers/architecture-rules` | Ecosystem-wide principles and invariants; cross-cutting standards; Architecture Decision Records; the capability catalogue as an index of one line per capability |
-| Each capability repository, under `docs/` | Its `CONTRACT.md` and longer contract, data model, threat model and control register, `PLAN.md`, and the processes it owns |
+| Each capability repository | Root: `CONTRACT.md`, `PLAN.md` while needed, and `RESOURCES.md`; under `docs/`: longer contracts, data models, threat models, control registers and processes it owns |
 | A suite's integration repository, e.g. `nuxt-layers/iam-integration`, under `docs/` | The suite's architecture and the processes that span several of its capabilities |
 
 Rules:
 
 1. **ADRs stay short.** An ADR follows [ADR-0010](ADR-0010-documentation-style.md)'s order and links to detail. It names the detailed document that carries the decision out; that document is authoritative because the ADR names it.
-2. **Another repository's documents are named through `RESOURCES.md`**, pinned to a tag or commit, so a decision refers to exactly the version that was reviewed. A material change to the detail requires a new or amended ADR that moves the pin.
+2. **Reviewed external architectural documents are named through `RESOURCES.md`**, at a verified immutable revision, so a decision refers to the document reviewed. A material architectural change requires ADR review; live software dependencies instead follow current `master` under ADR-0008.
 3. **Each capability's `RESOURCES.md` lists the ADRs that govern it**, so references run in both directions.
 4. **Ecosystem-wide rules are not restated** in capability repositories; they link here.
 5. **Detail that moves or is removed leaves no pointer file.** Remove references to inaccessible documents; retain only verified, accessible external references in `RESOURCES.md`.
@@ -38,7 +38,7 @@ The documentation authority order in the README is unchanged: an ADR outranks th
 | Gains | Costs |
 |---|---|
 | This repository stays small enough to read in full | Readers follow links across repositories, some of them private |
-| Capability detail is maintained beside the code that implements it | Changing pinned detail requires an ADR update |
+| Capability detail is maintained beside the code that implements it | Material changes to governing architecture require ADR review |
 | Accessible references can be verified when reviewed | Unavailable historical documents are not reconstructed |
 
 ## Guardrails
