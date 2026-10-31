@@ -43,5 +43,5 @@ This repository holds only what applies to the whole ecosystem. A capability's c
 | [Privacy](docs/privacy.md) | Data protection by design |
 | [Presentation, Internationalisation and Accessibility](docs/presentation.md) | Design tokens, languages, WCAG and the screen checklist |
 | [Capability Catalogue](docs/catalogue.md) | The capabilities that exist, the candidates, and the rules for starting one |
-| [Decisions](docs/decisions/) | One file per Architecture Decision Record, in number order |
+| [Decisions](docs/decisions/) | One file per Architecture Decision Record, in number order; ADR-0008 governs development integration and ADR-0013 the toolchain baseline |
 | [Resources](RESOURCES.md) | Every external document relied on, pinned |
