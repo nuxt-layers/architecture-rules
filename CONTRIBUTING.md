@@ -29,7 +29,7 @@ The workflow is AI-driven, **not human-free**. The use of multiple assistants do
 3. **Evidence-based:** substantiate claims using repository state, test results, review findings and reproducible evidence. Distinguish verified facts from assumptions.
 4. **Secure by design:** apply the project's current security and privacy standards; treat AI-generated code as untrusted until reviewed and verified.
 5. **Accessible and maintainable:** follow the platform's accessibility, internationalisation, documentation and maintainability requirements.
-6. **Traceable change:** use focused branches and pull requests, explain rationale, preserve history and respect protected branches and release policies.
+6. **Traceable change:** use focused branches and pull requests, explain rationale, preserve history and respect protected branches and the current development integration policy.
 7. **Equal standards:** apply the same review, tests, policies and acceptance criteria to human-authored and AI-generated contributions.
 
 ### Typical development lifecycle
@@ -40,7 +40,7 @@ The workflow is AI-driven, **not human-free**. The use of multiple assistants do
 4. **Implement:** make focused, reviewable changes without unrelated modifications.
 5. **Verify:** run applicable linting, type checking, unit, integration, end-to-end, security and accessibility checks; report gaps and failures explicitly.
 6. **Review and accept:** inspect the diff and evidence, resolve failures, and obtain the project owner's acceptance through the repository's protected-branch workflow.
-7. **Release and maintain:** follow the repository's versioning, dependency pinning, provenance and release policies; update consumer guidance when contracts change.
+7. **Integrate and maintain:** propagate accepted provider changes to affected consumers, resolve compatibility failures forward, and follow ADR-0008. Formal releases resume only after a separately accepted decision.
 
 The exact checks and release process depend on the repository's existing policies. A green CI run is necessary where required, but does not by itself prove correctness or security.
 
