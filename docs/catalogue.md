@@ -6,7 +6,7 @@
 
 1. Each layer implements one cohesive bounded capability, classified as Foundation, Platform or Domain, with a headless core and an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)).
 2. Applications are thin composition roots, supplying infrastructure, configuration, routing and deployment choices ([ADR-0001](decisions/ADR-0001-capability-repositories-and-composition-shells.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)).
-3. Dependencies are directed, acyclic, explicit and contract-based. Public contracts are exposed through deliberate entry points such as `/contracts`, and independently versioned layers declare capability metadata in the manifest standard.
+3. Dependencies are directed, acyclic, explicit and contract-based. Public contracts are exposed through deliberate entry points such as `/contracts`, and independently developed layers declare capability metadata in the manifest standard.
 4. Stateful capabilities own their persistence ports, schemas, migrations and any other stores ([ADR-0002](decisions/ADR-0002-composition-supplied-persistence-and-capability-owned-schemas.md), [ADR-0006](decisions/ADR-0006-polyglot-persistence-and-data-store-security.md)). No shared persistence service is permitted, and required persistence fails closed when its provider is absent.
 5. Identity owns users, groups, the single-parent group hierarchy and memberships; Profile owns personal data; Authentication owns sessions; Authorisation owns access decisions. Every human identity has one system-managed personal group.
 6. Every protected operation is authorised on the server. Security follows OWASP ASVS 5.0 Level 2, with applicable Level 3 controls for security-sensitive operations.
@@ -54,7 +54,7 @@ A repository is created only once these are established:
 1. purpose and bounded responsibility;
 2. owned state, rules and lifecycle;
 3. explicit exclusions;
-4. provided public contracts and their versions;
+4. provided public contracts and any schema versions required by tooling;
 5. required and optional capability contracts;
 6. configuration and persistence-provider requirements;
 7. security, privacy, accessibility and internationalisation obligations;

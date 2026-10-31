@@ -11,7 +11,7 @@
 | **Capabilities** | Own one bounded responsibility each, with a headless core and an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)). Classified Foundation, Platform or Domain |
 | **Presentation layers and libraries** | Draw screens over capabilities' contracts, or provide stateless shared formats such as `rich-text` |
 | **Suites** | Capabilities designed together, such as the IAM suite, wired once by their integration package ([ADR-0005](decisions/ADR-0005-iam-suite.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)) |
-| **Applications** | Composition roots: choose capability versions, pass connections, secrets, configuration and application decisions, set routes and branding, and deploy. Domain behaviour never defaults to the application |
+| **Applications** | Composition roots: select the latest accepted development revisions, pass connections, secrets, configuration and application decisions, set routes and branding, and deploy. Domain behaviour never defaults to the application |
 
 ## 2. Invariants
 
@@ -45,4 +45,4 @@ Privacy follows data protection by design: storage and access technologies, tele
 
 ## 6. Change
 
-A change to an invariant, the contract model, a dependency rule or an ecosystem-wide standard needs an ADR or a revision of the governing document. Compatibility and migration are always explicit.
+A change to an invariant, the contract model, a dependency rule or an ecosystem-wide standard needs an ADR or a revision of the governing document. Compatibility and migration are always explicit; during development consumers integrate the latest accepted `master` under ADR-0008.

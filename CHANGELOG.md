@@ -2,6 +2,12 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-10-31
+
+- Adopted continuous ecosystem development: latest accepted `master`, affected-consumer acceptance testing and fix-forward integration; suspended formal release and dependency-tag requirements pending a future release decision (ADR-0008 and dependent standards).
+- Aligned the Layer Standard, composition, documentation and contributing guidance with the development policy.
+- Established Node 26 LTS and pnpm 12 as the development and CI baseline (ADR-0013), distinct from consumer minimum runtime requirements.
+
 ## 2026-10-26
 
 - The organisation renamed from `nuxt4-layers` to `nuxt-layers`, and the package scope from `@nuxt4-layers/` to `@nuxt-layers/`, so neither names a Nuxt release.
