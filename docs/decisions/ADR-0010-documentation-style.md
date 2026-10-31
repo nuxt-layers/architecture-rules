@@ -6,7 +6,7 @@
 **Amended:** 2026-10-25: documents that stay true without upkeep; one file for external links, one for plans  
 **Amended:** 2026-10-26: `CONTRACT.md` listed with the other files; `RESOURCES.md` and `PLAN.md` at the repository root; the documentation style standard folded in
 
-> **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Versions, commits and status are written in one place per repository, never spread through its documents.
+> **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Historical reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
 
 ## Why
 
@@ -38,12 +38,12 @@ Keeping versions, pins and status up to date across many files costs time and to
 | File | Holds | Never holds |
 |---|---|---|
 | `README.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md` | What the repository is and how to work with it, in general terms. Links only to the repository's own documents | Version numbers, release names, pinned commits, status, plans or links outside the repository |
-| `RESOURCES.md` | Every external document the repository relies on, one table row each: what it is, why it is needed, and its pin (tag or commit). Apart from `CONTRACT.md`'s own pins, this is the only place external links and versions appear | Anything else |
+| `RESOURCES.md` | Every external architectural document relied on, one row each, identifying the revision reviewed (tag or commit). Live software dependencies follow ADR-0008. Apart from `CONTRACT.md`'s own pins, this is the only place external links and versions appear | Anything else |
 | `PLAN.md` | Every plan and its status: what is done, in progress and next, replacing roadmaps and registers. Present only while the repository has planned work: the architecture repository has none, as plans belong to each capability and to the applications driving the order of work | Decisions' reasoning, which stays in the documents it belongs to |
-| `CHANGELOG.md` | Each release and major change, newest first: its version, date and a short description of what changed | Plans, status, reasoning or links |
-| `CONTRACT.md` | A capability's one-page offer to hosts and other layers ([ADR-0012](ADR-0012-trivial-composition.md) §6), with its own release status and pinned version; a suite's contract also pins the members it composes, because they are part of what it offers | Any other repository's versions, plans or links; what it needs from elsewhere is named through `RESOURCES.md` |
+| `CHANGELOG.md` | Major changes, newest first, with dates; formal release versions resume when the release lifecycle is approved | Plans, status, reasoning or links |
+| `CONTRACT.md` | A capability's one-page offer to hosts and other layers ([ADR-0012](ADR-0012-trivial-composition.md) §6), with its development status and public interface; a suite describes the members it composes without release pins during development | Any other repository's versions, plans or links; what it needs from elsewhere is named through `RESOURCES.md` |
 
-Every other document refers to an external document by its entry in `RESOURCES.md`, with a short note on why, never by its own link. `CONTRACT.md`'s own pins are the only versions written outside `RESOURCES.md`.
+Every other document refers to an external document by its entry in `RESOURCES.md`, with a short note on why, never by its own link. During development, `CONTRACT.md` describes current composition without release pins (ADR-0008).
 
 ## Adopting it
 
@@ -55,4 +55,4 @@ New documents follow it from the start. Existing documents, and each repository'
 |---|---|
 | Faster reading and review | Rewriting older documents over time |
 | Fewer misreadings by people and AI | Editing for brevity takes effort |
-| A release or a new pin touches one file, not many | Readers follow one more step to reach an external document |
+| A historical reference update touches one file, not many | Readers follow one more step to reach an external document |
