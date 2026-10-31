@@ -30,7 +30,7 @@ Where documents conflict, authority descends in this order:
 
 ## Where things live
 
-This repository holds only what applies to the whole ecosystem. A capability's contracts, data model, threat model, plan and processes live in its own repository; a suite's architecture and cross-capability processes live in its integration repository, such as `nuxt-layers/iam-integration` ([ADR-0004](docs/decisions/ADR-0004-documentation-placement.md)). Documents elsewhere are listed in [Resources](RESOURCES.md). This repository holds no plans or status ([ADR-0010](docs/decisions/ADR-0010-documentation-style.md)).
+This repository holds only what applies to the whole ecosystem. A capability's contracts, data model, threat model, plan and processes live in its own repository; a suite's architecture and cross-capability processes live in its integration repository, such as `nuxt-layers/iam-integration` ([ADR-0004](docs/decisions/ADR-0004-documentation-placement.md)). Accessible external documents relied on are listed in [Resources](RESOURCES.md). This repository holds no plans or status ([ADR-0010](docs/decisions/ADR-0010-documentation-style.md)).
 
 ## Documents
 
@@ -44,4 +44,4 @@ This repository holds only what applies to the whole ecosystem. A capability's c
 | [Presentation, Internationalisation and Accessibility](docs/presentation.md) | Design tokens, languages, WCAG and the screen checklist |
 | [Capability Catalogue](docs/catalogue.md) | The capabilities that exist, the candidates, and the rules for starting one |
 | [Decisions](docs/decisions/) | One file per Architecture Decision Record, in number order; ADR-0008 governs development integration and ADR-0013 the toolchain baseline |
-| [Resources](RESOURCES.md) | Every external document relied on, pinned |
+| [Resources](RESOURCES.md) | Verified, accessible external documents relied on |
