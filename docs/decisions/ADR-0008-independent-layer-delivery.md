@@ -1,40 +1,46 @@
-# ADR-0008 — Independent Layer Delivery
+# ADR-0008 — Continuous Development and Layer Integration
 
 **Status:** Accepted  
 **Date:** 2026-10-11  
-**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions
-**Accepted:** 2026-10-23
+**Amended:** 2026-10-31: operational experience supersedes release-based integration during active development
 
-> **In short:** each layer is finished in its own repository against versioned contracts, with one draft pull request per repository, and the suite is composed and verified at release rather than on every change.
+> **In short:** until formal releases begin, each capability's latest accepted `master` is authoritative. Every change is integrated and tested across affected consumers, and incompatibilities are fixed forward.
 
 ## Why
 
-[ADR-0001](ADR-0001-capability-repositories-and-composition-shells.md) gives each capability its own repository, and [ADR-0005](ADR-0005-iam-suite.md) connects the IAM suite's members only through ports and an integration repository. In practice, building the suite drifted towards changing every member at once: each phase opened pull requests in four or five repositories, recomposed `platform-test-harness` against each merge commit, and watched every pull request until CI was green. That cost far more AI tokens and CI minutes than the work needed, and it tied the members' release cadence together.
-
-A monorepo was considered and rejected: it would make the members one large layer in practice, and lose the independence ADR-0001 exists to protect.
+Independent release tags and delayed composition have imposed unnecessary administration during active development and deferred the discovery of cross-layer breakage. The ecosystem needs independent repository ownership without postponing integration.
 
 ## The decision
 
-Each layer is finished in its own repository against versioned contracts. The suite is composed and verified at release, not on every change.
+During pre-release development:
 
-1. **One layer at a time.** A change is delivered in the repository that owns it, against the other members' published contracts. Members never import one another; they connect only through the integration repository's adapters. A change that needs another member's contract to change waits for that member's release.
-2. **Versioned ports.** From 1.0, every capability follows semantic versioning. A change that breaks its contract needs a new contract version and a major release; consumers and adapters pin a tag, never a moving branch. Each release is listed in the repository's `CHANGELOG.md`.
-3. **Composition at release.** `platform-test-harness` is pinned to released tags, and is recomposed and run when a member releases, not for each pull request. A member's own CI proves its contract with its own tests and conformance suites.
-4. **Design before code.** Design questions are put to the project owner before code is generated ([Contributing](../../CONTRIBUTING.md)).
-5. **One draft pull request per repository** for each piece of work. Its CI is fixed until green.
-6. **Minimal monitoring.** Pull requests are not watched or polled by default. The project owner reports merges and asks for follow-up when it is needed.
-7. **Reproducible builds.** CI uses the ECR Public mirror of PostgreSQL (`public.ecr.aws/docker/library/postgres`). Lockfiles record Git dependencies as `codeload.github.com` tarballs, never `git@github.com`.
+1. **Current development source.** Every layer and application consumes the latest accepted `master` of its dependencies. Superseded development revisions are not compatibility targets.
+2. **Immediate propagation.** A provider change merged into `master` triggers refresh and acceptance testing in affected consuming layers, integration repositories and applications. Adoption begins immediately; it is complete only when those consumers have passed.
+3. **Fix forward.** Breaking changes found in integration are repaired in affected consumers or, where the provider is defective, in the provider. Do not hold consumers on older development revisions merely to avoid integration work.
+4. **No formal development releases.** New release packages, release tags and release-based dependency pins are suspended until the project owner explicitly approves a release lifecycle. Existing tags and releases remain historical records.
+5. **Independent ownership.** Changes remain focused in the repository that owns them, delivered through protected-branch pull requests. Public contracts, ports and capability boundaries remain mandatory.
+6. **Reproducible execution, not frozen development.** Dependency tooling may record commit resolutions internally and CI may use frozen lockfiles. These records must be refreshed as part of propagation and must not be treated as reasons to defer adopting the latest `master`.
+7. **Cost discipline.** Affected consumers, rather than every unrelated repository, are tested. Pull requests are not continuously polled or monitored by AI agents by default; merge-triggered automation may perform the required refresh and checks.
+8. **Security and design.** Design decisions remain subject to human acceptance, and security, quality and contract verification remain required throughout development.
+
+When formal releases are approved, a separate accepted decision will define versioning, release compatibility, publishing and migration requirements.
+
+## Adopting it
+
+Update dependency declarations, workflows, contracts and consumer harnesses to follow and test current `master`. Automate propagation where practical, with failures reported for correction rather than silently tolerated.
 
 ## What follows
 
 | Gains | Costs |
 |---|---|
-| Each piece of work touches the fewest repositories, which reduces tokens, CI minutes and review effort | A defect that only shows when members are composed is found at release rather than at merge. Conformance suites and adapter type checks narrow the gap |
-| Members release on their own cadence; a host upgrades one member at a time | A cross-member change takes one release per member, in dependency order |
-| Contracts become the real boundary, because nothing else can be relied on between releases | Unwatched pull requests depend on the project owner to report failures and merges |
+| Breaking integration changes surface promptly | A provider merge may require follow-up work in several consumers |
+| No release administration during active development | Integration automation and ownership must be maintained |
+| Latest accepted code is used throughout the ecosystem | Consumers can temporarily fail until fixes are merged |
+| Capability boundaries and repository independence remain | Acceptance testing must establish the integrated state |
 
 ## Guardrails
 
-- The integration repository's adapters state structurally what they need of each member, so a host's type check shows when a release no longer fits.
-- A member's release that changes a port's shape is a major release, and the harness is recomposed against it before the integration repository's pin moves.
-- [ADR-0004](ADR-0004-documentation-placement.md) and [ADR-0010](ADR-0010-documentation-style.md) still apply: other repositories' documents are named through `RESOURCES.md`, pinned to a tag or commit.
+- A passing provider CI run does not itself prove consumer compatibility.
+- No automatic forced pushes, unreviewed merges or weakening of protected branches.
+- Lockfile or tool-generated commit identifiers do not constitute a formal pinning policy.
+- Historical architectural references in `RESOURCES.md` remain revision-specific under ADR-0004 and ADR-0010.
