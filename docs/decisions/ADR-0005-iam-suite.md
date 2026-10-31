@@ -44,7 +44,7 @@ Members meet only through public contracts and host-supplied ports. `iam-integra
 
 ### 3. Where the detail lives
 
-Following [ADR-0004](ADR-0004-documentation-placement.md), the suite architecture, the state models and the cross-capability processes (provisioning, joining and leaving, pausing, suspension, approval, account closure with a grace period, data-subject requests, recovery) belong in `nuxt-layers/iam-integration`. The currently accessible repository does not contain those documents; they must be supplied before their contents can be relied on. Each member's own contract documents its part.
+Following [ADR-0004](ADR-0004-documentation-placement.md), the suite architecture, the state models and the cross-capability processes (provisioning, joining and leaving, pausing, suspension, approval, account closure with a grace period, data-subject requests, recovery) belong in `nuxt-layers/iam-integration`. Each member's own contract documents its part. Suite-level processes must be established from those independently owned public contracts; foundational members do not depend on the integration repository's internal documentation.
 
 ## What follows
 
