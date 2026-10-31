@@ -26,7 +26,7 @@ The cost is not only code. Every composition sends a person or an AI agent throu
 
 Composing a capability into a host takes:
 
-- one package install, pinned to a release;
+- one package install, following current accepted `master` during development;
 - one call in one server plugin, passing only what the host already owns;
 - no more than **50 lines** of host code for that capability, counted as every line outside the host's own screens, content and data files that names the capability.
 
@@ -34,7 +34,7 @@ What the host passes is limited to: connections and secrets ([ADR-0002](ADR-0002
 
 ### 2. The same shapes everywhere
 
-Every capability asks for the shared needs in the same structural shapes, written here and copied verbatim into each contract. There is no shared runtime package: TypeScript's structural typing makes one provider fit every capability, and no release couples to another ([ADR-0008](ADR-0008-independent-layer-delivery.md)).
+Every capability asks for the shared needs in the same structural shapes, written here and copied verbatim into each contract. There is no shared runtime package: TypeScript's structural typing makes one provider fit every capability, and repository ownership does not couple to another ([ADR-0008](ADR-0008-independent-layer-delivery.md)).
 
 | Need | Shape |
 |---|---|
@@ -58,7 +58,7 @@ Where capabilities belong together, one package wires them once and returns the 
 
 ### 4. Proven, not promised
 
-Every capability carries `examples/minimal-host`: a Nuxt application that composes it, and nothing else, within the budget. CI builds it, runs a smoke test against it and fails when its composition code exceeds the budget. The platform test harness proves combinations using only these published compositions. Release notes give the figure.
+Every capability carries `examples/minimal-host`: a Nuxt application that composes it, and nothing else, within the budget. CI builds it, runs a smoke test against it and fails when its composition code exceeds the budget. The platform test harness proves combinations against the latest accepted development revisions. Acceptance results give the figure.
 
 ### 5. Screens
 
@@ -70,7 +70,7 @@ Every capability has `CONTRACT.md` at its root: what a host needs and nothing el
 
 | Section | Holds |
 |---|---|
-| Install | The pinned dependency and one configuration example, within the budget |
+| Install | The current development dependency and one configuration example, within the budget |
 | Settings | Each environment variable or configuration value, its default, and what it does |
 | Host passes | What the host must supply, in the shared shapes of decision 2, and nothing with a default |
 | Client and server functions | Those screens and other capabilities call, with inputs, outputs and error codes |
@@ -90,7 +90,7 @@ The capability's longer contract stays for its own developers. When the two disa
 | 3 | `iam-integration` with the IAM suite | Removes the per-host caller mapping and access policies for every other capability |
 | 4 | `configuration` | Its administration depends on the IAM adapters |
 
-Adding defaults and the minimal host is a minor release. Removing a provider function a host used is a major one (ADR-0008). Applications adopt each release as it lands, and each block's PR reports the drop in host code.
+Adding defaults and the minimal host, or changing a provider function, is delivered through protected pull requests. Affected applications adopt the latest accepted `master` and fix incompatibilities forward (ADR-0008). Each block's PR reports the drop in host code.
 
 ## What follows
 
@@ -99,7 +99,7 @@ Adding defaults and the minimal host is a minor release. Removing a provider fun
 | Composing a capability is quick, cheap and predictable, for people and for agents | Each capability gains a PostgreSQL store, fakes and an example host to maintain |
 | One access decision and one caller resolver serve every capability | The shared shapes must be agreed before the pilot, and changing one touches every contract |
 | Applications hold product code, not plumbing | The budget is a line count, a proxy that can be gamed; reviewers judge the spirit |
-| Combinations proven in the harness carry straight into applications | Released capabilities need a minor, and some a major, release to comply |
+| Combinations proven in the harness carry straight into applications | Breaking changes require immediate consumer integration and corrections |
 
 ## Guardrails
 
