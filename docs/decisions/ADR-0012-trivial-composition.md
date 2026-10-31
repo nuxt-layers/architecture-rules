@@ -3,7 +3,8 @@
 **Status:** Accepted  
 **Date:** 2026-10-24  
 **Revised:** 2026-10-25: screens follow the amended ADR-0009; every capability has a one-page host contract  
-**Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines
+**Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
+**Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -57,9 +58,9 @@ Every capability carries `examples/minimal-host`: a Nuxt application that compos
 
 [ADR-0009](ADR-0009-headless-capability-layers.md), as amended on 2026-10-25, lets a capability ship its own screens as an optional presentation part. Using them costs the host only configuration: their paths, wording overrides, or `presentation: false`. That configuration counts against the budget; the screens themselves do not.
 
-### 6. A one-page host contract
+### 6. A self-contained consumer contract
 
-Every capability has `CONTRACT.md` at its root: what a host needs and nothing else, in at most **200 lines**, so that a person or an agent composes it from that page alone, without reading the capability's other documents or code. Its sections, in this order:
+Every capability has a root `CONTRACT.md` containing the **shortest complete description of its public integration surface**. A consuming person or agent MUST be able to install, configure, compose and use the capability from that document alone, without reading other documentation or private source. There is no fixed line limit: omit repetition, internal design and implementation history, but never omit information required for correct use. Its sections, in this order:
 
 | Section | Holds |
 |---|---|
@@ -72,7 +73,7 @@ Every capability has `CONTRACT.md` at its root: what a host needs and nothing el
 | Headless surface | What any screen must still do (ADR-0009) |
 | You will hit this | Rules a host would otherwise discover by failing: identifier formats, name patterns, what needs a second person or step-up |
 
-The capability's longer contract stays for its own developers. When they disagree, the accepted ADRs and normative capability specification govern; the documents and implementation must be reconciled before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
+Detailed internal specifications stay under `docs/` for maintainers and do not define a competing consumer interface. The public contract contains precise available imports, required port shapes, callable signatures, inputs, outputs, failure codes and relevant operational requirements; examples must not conceal required configuration or undefined dependencies. If the public contract, internal specification or implementation disagree, reconcile them against the accepted ADRs and normative capability requirements before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
 
 ## Adopting it
 
@@ -86,7 +87,7 @@ A suite's integration repository composes its members only after their independe
 |---|---|
 | Composing a capability is quick, cheap and predictable, for people and for agents | Each capability gains a PostgreSQL store, fakes and an example host to maintain |
 | One access decision and one caller resolver serve every capability | The shared shapes must be agreed before the pilot, and changing one touches every contract |
-| Applications hold product code, not plumbing | The budget is a line count, a proxy that can be gamed; reviewers judge the spirit |
+| Applications hold product code, not plumbing | Consumer contracts require review for both completeness and unnecessary detail |
 | Combinations proven in the harness carry straight into applications | Breaking changes require immediate consumer integration and corrections |
 
 ## Guardrails
@@ -95,4 +96,6 @@ A suite's integration repository composes its members only after their independe
 - `examples/minimal-host` composes within the budget, or CI fails.
 - No host writes a store, fake or relay for a capability that complies with this ADR; a review that finds one raises it against the capability.
 - The shared shapes change only by amending this ADR.
-- `CONTRACT.md` exists, keeps its sections and stays within 200 lines; the repository's documentation check fails otherwise.
+- `CONTRACT.md` exists and keeps its required sections. Documentation checks validate structure and reference integrity, not an arbitrary line count.
+- A minimal consumer integration or contract acceptance test MUST demonstrate that the contract is sufficient without reading the capability's other documents or private source; missing necessary information fails acceptance.
+- Public API changes update `CONTRACT.md` in the same change. Consumers receive that document alone as their documentation handover.
