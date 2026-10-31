@@ -9,16 +9,9 @@
 
 ## Why
 
-[ADR-0001](ADR-0001-capability-repositories-and-composition-shells.md) makes applications *lightweight composition roots*. In practice they are not. Measured on 24 October 2026 with a coupling map of the released layers:
+Applications should remain lightweight composition roots. Without a common contract for ports and composition, each application repeats store configuration, caller resolution, access-decision wiring and operational tasks. This makes capabilities harder to integrate and verify independently.
 
-| Finding | Evidence |
-|---|---|
-| The capabilities are well separated | No capability imports another, apart from `publisher` using `rich-text`. Each declares its own ports |
-| The hosts are not light | Westray-Papa-Westray holds about 1,850 lines in 23 files that touch a capability; the platform test harness about 1,050 in 14 |
-| The same work is repeated | Each host writes its own theme store, its own access policies, its own mapping from the signed-in person to each capability's idea of a caller, its own outbox relays and maintenance timers |
-| Pairs need their own glue | Each capability asks for "who is calling" and "may they" in its own shape, so Authorisation must be adapted to each capability separately; `iam-integration` does this once for the IAM suite, yet each host still writes over 300 lines around it |
-
-The cost is not only code. Every composition sends a person or an AI agent through several repositories' internals, and that is what makes integration slow and expensive.
+The cost is both code and coupling: consumers should compose a capability from its public contract without reading private implementation details.
 
 ## The decision
 
@@ -83,14 +76,9 @@ The capability's longer contract stays for its own developers. When they disagre
 
 ## Adopting it
 
-| Order | Capability | Because |
-|---|---|---|
-| 1 | `theme-manager` | Small, and its hosts each write a store and a policy (about 590 lines in Westray-Papa-Westray) |
-| 2 | `publisher` | The most host code in Westray-Papa-Westray (about 790 lines); `content-editor` is built to this rule from the start |
-| 3 | `iam-integration` with the IAM suite | Removes the per-host caller mapping and access policies for every other capability |
-| 4 | `configuration` | Its administration depends on the IAM adapters |
+Each capability implements the common contract and composition requirements in its own repository. Its own plan determines implementation order; consumers adopt the accepted public surface through protected pull requests and verify integration against current development dependencies (ADR-0008).
 
-Adding defaults and the minimal host, or changing a provider function, is delivered through protected pull requests. Affected applications adopt the latest accepted `master` and fix incompatibilities forward (ADR-0008). Each block's PR reports the drop in host code.
+A suite's integration repository composes its members only after their independent public contracts are established. Capability-specific migration plans, metrics and implementation decisions stay with their owners.
 
 ## What follows
 
