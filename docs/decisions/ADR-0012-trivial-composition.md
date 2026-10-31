@@ -73,7 +73,7 @@ Every capability has a root `CONTRACT.md` containing the **shortest complete des
 | Headless surface | What any screen must still do (ADR-0009) |
 | You will hit this | Rules a host would otherwise discover by failing: identifier formats, name patterns, what needs a second person or step-up |
 
-Detailed internal specifications stay under `docs/` for maintainers and do not define a competing consumer interface. The public contract contains precise available imports, required port shapes, callable signatures, inputs, outputs, failure codes and relevant operational requirements; examples must not conceal required configuration or undefined dependencies. When they disagree, the accepted ADRs and normative capability specification govern; the documents and implementation must be reconciled before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
+Detailed internal specifications stay under `docs/` for maintainers and do not define a competing consumer interface. The public contract contains precise available imports, required port shapes, callable signatures, inputs, outputs, failure codes and relevant operational requirements; examples must not conceal required configuration or undefined dependencies. If the public contract, internal specification or implementation disagree, reconcile them against the accepted ADRs and normative capability requirements before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
 
 ## Adopting it
 
