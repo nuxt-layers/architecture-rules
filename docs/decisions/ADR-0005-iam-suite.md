@@ -2,7 +2,8 @@
 
 **Status:** Accepted  
 **Date:** 2026-10-09  
-**Amended:** 2026-10-23: `iam-integration`'s documents pinned (§3)
+**Amended:** 2026-10-23: suite documentation allocated to `iam-integration` (§3)  
+**Amended:** 2026-10-31: removed unavailable external document references
 
 > **In short:** five capabilities form the IAM suite, meeting only through contracts and ports: Authentication, Identity, Profile, Authorisation and `iam-integration`. Ten suite-wide invariants, from self-sovereignty to durable events, bind them all.
 
@@ -43,7 +44,7 @@ Members meet only through public contracts and host-supplied ports. `iam-integra
 
 ### 3. Where the detail lives
 
-Following [ADR-0004](ADR-0004-documentation-placement.md), the suite architecture, the state models and the cross-capability processes (provisioning, joining and leaving, pausing, suspension, approval, account closure with a grace period, data-subject requests, recovery) are specified in `nuxt-layers/iam-integration`: its architecture, states and processes ([Resources](../../RESOURCES.md): *IAM suite architecture*). Each member's own contract documents its part.
+Following [ADR-0004](ADR-0004-documentation-placement.md), the suite architecture, the state models and the cross-capability processes (provisioning, joining and leaving, pausing, suspension, approval, account closure with a grace period, data-subject requests, recovery) belong in `nuxt-layers/iam-integration`. The currently accessible repository does not contain those documents; they must be supplied before their contents can be relied on. Each member's own contract documents its part.
 
 ## What follows
 

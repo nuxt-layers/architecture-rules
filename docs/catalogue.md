@@ -33,7 +33,7 @@
 
 ## Candidates
 
-Possible capabilities, not planned: each is built only when an application needs it and its bounded responsibility is established (below). Their definitions are in [Resources](../RESOURCES.md): *Catalogue v0.4*.
+Possible capabilities, not planned: each is built only when an application needs it and its bounded responsibility is established (below). The candidate names are provisional; definitions belong in their eventual capability repositories.
 
 - **Foundation:** `privacy`, `logging-service`, `uuidv7-generator`, `caching-service`, `clock-service`.
 - **Platform:** `observability-service`, `notification-service`, `event-bus-service`, `job-service`, `scheduling-service`, `workflow-service`, `process-service`, `task-service`, `project-service`, `reporting-service`, `search-service`, `document-service`, `location-service`, `tenancy-service`.
