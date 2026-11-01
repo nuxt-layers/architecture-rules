@@ -58,6 +58,7 @@ Rules:
 ├── PLAN.md        while there is planned work
 ├── README.md
 ├── RESOURCES.md
+├── STORAGE-REGISTER.md   when storage is created or caused
 ├── capability.json
 ├── nuxt.config.ts
 └── package.json
@@ -71,6 +72,7 @@ Each independently developed layer documents:
 - security and privacy where they apply, with a threat model and control register for security-critical capabilities;
 - for a capability, its *Headless surface*: what any screen drawing it must still do (ADR-0009);
 - `CONTRACT.md`, its concise, complete integration contract for hosts ([ADR-0012](decisions/ADR-0012-trivial-composition.md) §6);
+- `STORAGE-REGISTER.md` at the root when the capability causes persistent storage, covering the inventory required by Privacy §5;
 - `CHANGELOG.md`, `RESOURCES.md` and, while it has planned work, `PLAN.md`, all at the root; Resources names the ADRs and other documents it relies on ([ADR-0010](decisions/ADR-0010-documentation-style.md)).
 
 Default branches are protected; material changes come through pull requests, and architecture-changing work names the governing ADR.
