@@ -4,7 +4,8 @@
 **Date:** 2026-10-21  
 **Accepted:** 2026-10-22  
 **Amended:** 2026-10-25: documents that stay true without upkeep; one file for external links, one for plans  
-**Amended:** 2026-10-26: `CONTRACT.md` listed with the other files; `RESOURCES.md` and `PLAN.md` at the repository root; the documentation style standard folded in
+**Amended:** 2026-10-26: `CONTRACT.md` listed with the other files; `RESOURCES.md` and `PLAN.md` at the repository root; the documentation style standard folded in  
+**Amended:** 2026-11-04: an application's `RESOURCES.md` also records its hosting and storage providers (ADR-0014)
 
 > **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Verified external reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
 
@@ -38,7 +39,7 @@ Keeping versions, pins and status up to date across many files costs time and to
 | File | Holds | Never holds |
 |---|---|---|
 | `README.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md` | What the repository is and how to work with it, in general terms. Links only to the repository's own documents | Version numbers, release names, pinned commits, status, plans or links outside the repository |
-| `RESOURCES.md` | Every accessible external architectural document relied on, one row each, identifying the verified revision reviewed (tag or commit). Live software dependencies follow ADR-0008. This is the only place external architectural links and verified revisions appear; software dependency resolution follows ADR-0008 | Anything else |
+| `RESOURCES.md` | Every accessible external architectural document relied on, one row each, identifying the verified revision reviewed (tag or commit). Live software dependencies follow ADR-0008. This is the only place external architectural links and verified revisions appear; software dependency resolution follows ADR-0008. In an application, also each hosting and storage provider's region, assurance evidence and date checked ([ADR-0014](ADR-0014-hosting-and-storage-providers.md)) | Anything else |
 | `PLAN.md` | Every plan and its status: what is done, in progress and next, replacing roadmaps and registers. Present only while the repository has planned work: the architecture repository has none, as plans belong to each capability and to the applications driving the order of work | Decisions' reasoning, which stays in the documents it belongs to |
 | `CHANGELOG.md` | Major changes, newest first, with dates; formal release versions resume when the release lifecycle is approved | Plans, status, reasoning or links |
 | `STORAGE-REGISTER.md` | Actual storage mechanisms owned or caused by the capability, including cookies, browser storage and server stores: purpose, contents, operational essentiality and fallback, retention, scope, controls and consent-relevant facts. Required when storage exists (Privacy §5) | Plans, proposed storage presented as implemented, or jurisdiction-specific legal conclusions |

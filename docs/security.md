@@ -109,6 +109,8 @@ Paid certification, commercial security products and external assurance are not 
 
 ISO/IEC 27001 certification, Cyber Essentials certification, NHS DSPT/DTAC, HITRUST, health-sector controls, independent penetration testing, specialist SIEM services or external KMS services become mandatory only when application risk, data classification, contractual obligation or applicable law requires them.
 
+This does not apply to hosting and storage providers, whose independent assurance is required before use ([ADR-0014](decisions/ADR-0014-hosting-and-storage-providers.md)).
+
 The architecture SHOULD avoid preventable design choices that would make later adoption of such controls disproportionately difficult.
 
 Applications processing special-category, health, regulated or otherwise high-impact data MUST perform a separate applicability and risk assessment before such processing is introduced.
@@ -183,7 +185,7 @@ Each capability MUST document, in its contract, every store it uses:
 1. Erasure and anonymisation MUST reach every store, including derived copies, caches and search indexes, within the capability's documented period. Backups age out on a documented schedule.
 2. Anonymisation of a person is by unlinking ([ADR-0005](decisions/ADR-0005-iam-suite.md)): stores outside Profile hold only opaque identifiers, so removing Profile's link is sufficient unless a capability documents personal data of its own.
 3. Retention periods MUST be documented per store and enforced by the capability.
-4. A tenant's data region MUST be honoured by every store holding that tenant's data, including derived copies and backups. A capability that cannot honour a region refuses to store that tenant's data rather than storing it elsewhere.
+4. A tenant's data region MUST be honoured by every store holding that tenant's data, including derived copies and backups. A capability that cannot honour a region refuses to store that tenant's data rather than storing it elsewhere. Providers outside the UK follow [ADR-0014](decisions/ADR-0014-hosting-and-storage-providers.md).
 
 ### 16.7 Verification
 
