@@ -34,7 +34,7 @@ A genuinely stateless library does not need a register; its contract states that
 
 Reusable capability contracts SHOULD avoid hard-coding the rules of one jurisdiction. Applications MAY provide policies or adapters for the jurisdictions they need to support.
 
-The first applications are designed for UK data-protection and electronic-communications law, keeping room for other jurisdictions.
+The first applications are designed for UK data-protection and electronic-communications law, keeping room for other jurisdictions. UK law governs their data wherever it is stored; it may be hosted or stored outside the UK under [ADR-0014](decisions/ADR-0014-hosting-and-storage-providers.md).
 
 ## 7. User rights and lifecycle
 
