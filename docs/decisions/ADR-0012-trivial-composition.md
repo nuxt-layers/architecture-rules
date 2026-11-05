@@ -4,7 +4,8 @@
 **Date:** 2026-10-24  
 **Revised:** 2026-10-25: screens follow the amended ADR-0009; every capability has a one-page host contract  
 **Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
-**Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract
+**Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
+**Amended:** 2026-11-05: files join the shared shapes, filled by `storage`
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -24,7 +25,7 @@ Composing a capability into a host takes:
 - one call in one server plugin, passing only what the host already owns;
 - no more than **50 lines** of host code for that capability, counted as every line outside the host's own screens, content and data files that names the capability.
 
-What the host passes is limited to: connections and secrets ([ADR-0002](ADR-0002-composition-supplied-persistence-and-capability-owned-schemas.md)), configuration values, and decisions that belong to the application, such as which document types it registers. Everything else has a default.
+What the host passes is limited to: services in the shared shapes of decision 2, connections and secrets ([ADR-0002](ADR-0002-composition-supplied-persistence-and-capability-owned-schemas.md)), configuration values, and decisions that belong to the application, such as which document types it registers. Everything else has a default.
 
 ### 2. The same shapes everywhere
 
@@ -39,6 +40,7 @@ Every capability asks for the shared needs in the same structural shapes, writte
 | Events | The capability's outbox, drained by `relay()`; the host never reads its tables |
 | Scheduled work | `tasks: { name, every, run }[]`, run by the host's one scheduler |
 | Clock | `now()`, defaulting to the system clock |
+| Files | The `StorageService` of `storage`'s contract: the host passes `storageFor('<consumer>')`; the consumer keeps each item's record and storage only the bytes. The consumer never imports `storage` |
 
 ### 3. Capabilities fill their own ports
 
