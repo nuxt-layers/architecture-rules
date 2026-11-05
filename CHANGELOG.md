@@ -2,6 +2,10 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-05 (site hosting)
+
+- Catalogue: `site-hosting` proposed, for custom domains and finding a request's site.
+
 ## 2026-11-05
 
 - Catalogue: candidates proposed in Publisher's design review (scheduler, workflow, content security, export, privacy, policy map, document search, translation, metadata, notifications, events queue, comments, integrations, and a suggested SEO layer), with older candidate names folded into them.
