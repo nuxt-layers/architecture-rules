@@ -18,6 +18,7 @@
 | Capability | Class | Owns |
 |---|---|---|
 | `theme-manager` | Foundation | Theme definitions, the semantic token vocabulary, contrast checks, selection and preferences; the only authority for the effective theme |
+| `clock` | Foundation | Canonical date/time values, strict parsing, localisation, IANA time-zone conversion, calendar arithmetic and an injectable clock |
 | `configuration` | Foundation | The facts a site, tenant or group states about itself, changed through approvals |
 | `identity` | Foundation (IAM) | Identities, each person's personal group, groups, the single-parent hierarchy, tenants and memberships with their lifecycle; no personal data beyond opaque identifiers |
 | `authentication` | Foundation (IAM) | Credential verification, sign-in identifiers, sessions, rotation, revocation and reauthentication |
@@ -36,7 +37,7 @@
 
 Possible capabilities, not planned: each is built only when an application needs it and its bounded responsibility is established (below). The candidate names are provisional; definitions belong in their eventual capability repositories.
 
-- **Foundation:** `privacy`, `logging-service`, `uuidv7-generator`, `caching-service`, `clock-service`.
+- **Foundation:** `privacy`, `logging-service`, `uuidv7-generator`, `caching-service`.
 - **Platform:** `observability-service`, `notification-service`, `event-bus-service`, `job-service`, `scheduling-service`, `workflow-service`, `process-service`, `task-service`, `project-service`, `reporting-service`, `search-service`, `document-service`, `location-service`, `tenancy-service`.
 - **Domain:** `organisation-service`, `company-service`, `department-service`, `club-service`, `committee-service`, `membership-service`, `office-service`; `product-service`, `pricing-service`, `inventory-service`, `order-service`, `invoice-service`, `billing-service`, `accounting-service`, `payment-service`, `subscription-service`, `shop-service`, `marketplace-service`; `warehouse-service`, `logistics-service`, `asset-service`, `workshop-service`, `booking-service`; `course-service`, `enrolment-service`, `training-service`, `event-service`, `game-service`.
 - **Presentation and composition:** `user-management-ui`, `warehouse-management-ui`, `workflow-management-ui`, `workshop-management-ui`, `company-console`, `integration-adapters`, `integrations`, `api-gateway`.
