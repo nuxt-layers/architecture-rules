@@ -62,6 +62,7 @@ Named by the owner during Publisher's design review (5 November 2026). Still can
 | `comments-engine` | Platform | Comments on content |
 | `integrations` | Platform | Adapters to outside services such as Google Docs, Microsoft 365 and social feeds |
 | `seo` | Platform | Redirects, sitemaps and search-engine metadata, driven by Publisher's address events. Suggested in the review; not yet confirmed |
+| `site-hosting` | Platform | Where each site is served: custom domains, proving their ownership, and finding the site for a request's address. Certificates and deployment stay with the host's proxy and provider (ADR-0014) |
 
 ## Consolidations
 
