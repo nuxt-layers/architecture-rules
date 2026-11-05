@@ -2,6 +2,10 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-05
+
+- Catalogue: candidates proposed in Publisher's design review (scheduler, workflow, content security, export, privacy, policy map, document search, translation, metadata, notifications, events queue, comments, integrations, and a suggested SEO layer), with older candidate names folded into them.
+
 ## 2026-11-04
 
 - Hosting and storage providers may be outside the UK where UK data-protection law permits the transfer, with each provider's security verified independently and recorded by each application (ADR-0014); the privacy baseline states that UK law governs; ADR-0010 amended for providers in an application's `RESOURCES.md`.
