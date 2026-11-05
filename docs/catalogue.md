@@ -26,7 +26,8 @@
 | `iam-integration` | Foundation (IAM) | The IAM suite's architecture, cross-capability processes and the adapters connecting its members ([ADR-0005](decisions/ADR-0005-iam-suite.md)); no data of its own |
 | `rich-text` | Library | The one safe formatted-text format, its profiles, checks and safe tree; never renders ([ADR-0011](decisions/ADR-0011-shared-rich-text-and-configurable-copy.md)) |
 | `publisher` | Platform | Documents of host-registered types: drafts, versions, approval, scheduling, addresses, listings and feeds |
-| `media` | Platform | Images: web-ready variants, metadata removal, alt text, group ownership and allowances; the files themselves in a host-supplied bucket |
+| `media` | Platform | Images: web-ready variants, metadata removal, alt text, group ownership and allowances; the files themselves through `storage` |
+| `storage` | Platform | Files' bytes in an object store behind one provider-agnostic port: keys under tenant and group, signed addresses, lifecycle, backups and usage figures; no records of its own |
 | `ui` | Presentation | Generic, fully styled components on Theme Manager's vocabulary; knows no capability |
 | `content-editor` | Presentation | Editing screens for Publisher's documents, saving through Publisher's functions; no data of its own |
 | `gallery` | Presentation | Albums and photo of the week as Publisher types over media's images; no data of its own |
@@ -43,7 +44,7 @@ Possible capabilities, not planned: each is built only when an application needs
 ## Consolidations
 
 - No shared `persistence-service` (ADR-0002). Generic `user-service` and `group-service` are Identity; sessions stay in Authentication.
-- `blog-service` is a Publisher document type; `image-service`, `storage-service` and `media-library-ui` are `media`; `todo-manager` belongs in `task-service`.
+- `blog-service` is a Publisher document type; `image-service` and `media-library-ui` are `media`; `storage-service` is `storage`; `todo-manager` belongs in `task-service`.
 - `iam-integration` is unrelated to the general-purpose `integrations` candidate.
 - Existing repository names and contracts are kept unless an independently reviewed change justifies a migration.
 
