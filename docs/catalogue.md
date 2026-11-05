@@ -26,7 +26,7 @@
 | `iam-integration` | Foundation (IAM) | The IAM suite's architecture, cross-capability processes and the adapters connecting its members ([ADR-0005](decisions/ADR-0005-iam-suite.md)); no data of its own |
 | `rich-text` | Library | The one safe formatted-text format, its profiles, checks and safe tree; never renders ([ADR-0011](decisions/ADR-0011-shared-rich-text-and-configurable-copy.md)) |
 | `publisher` | Platform | Documents of host-registered types: drafts, versions, approval, scheduling, addresses, listings and feeds |
-| `media` | Platform | Images: web-ready variants, metadata removal, alt text, group ownership and allowances; the files themselves through `storage` |
+| `media` | Platform | Images: web-ready variants, metadata removal, alt text, group ownership and allowances; the files themselves through the Files shape ([ADR-0012](decisions/ADR-0012-trivial-composition.md)), which the host fills with `storage` |
 | `storage` | Platform | Files' bytes in an object store behind one provider-agnostic port: keys under tenant and group, signed addresses, lifecycle, backups and usage figures; no records of its own |
 | `ui` | Presentation | Generic, fully styled components on Theme Manager's vocabulary; knows no capability |
 | `content-editor` | Presentation | Editing screens for Publisher's documents, saving through Publisher's functions; no data of its own |
