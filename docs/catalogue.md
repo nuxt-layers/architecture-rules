@@ -37,16 +37,38 @@
 
 Possible capabilities, not planned: each is built only when an application needs it and its bounded responsibility is established (below). The candidate names are provisional; definitions belong in their eventual capability repositories.
 
-- **Foundation:** `privacy`, `logging-service`, `uuidv7-generator`, `caching-service`.
-- **Platform:** `observability-service`, `notification-service`, `event-bus-service`, `job-service`, `scheduling-service`, `workflow-service`, `process-service`, `task-service`, `project-service`, `reporting-service`, `search-service`, `document-service`, `location-service`, `tenancy-service`.
+- **Foundation:** `logging-service`, `uuidv7-generator`, `caching-service`.
+- **Platform:** `observability-service`, `process-service`, `task-service`, `project-service`, `reporting-service`, `search-service`, `document-service`, `location-service`, `tenancy-service`.
 - **Domain:** `organisation-service`, `company-service`, `department-service`, `club-service`, `committee-service`, `membership-service`, `office-service`; `product-service`, `pricing-service`, `inventory-service`, `order-service`, `invoice-service`, `billing-service`, `accounting-service`, `payment-service`, `subscription-service`, `shop-service`, `marketplace-service`; `warehouse-service`, `logistics-service`, `asset-service`, `workshop-service`, `booking-service`; `course-service`, `enrolment-service`, `training-service`, `event-service`, `game-service`.
-- **Presentation and composition:** `user-management-ui`, `warehouse-management-ui`, `workflow-management-ui`, `workshop-management-ui`, `company-console`, `integration-adapters`, `integrations`, `api-gateway`.
+- **Presentation and composition:** `user-management-ui`, `warehouse-management-ui`, `workflow-management-ui`, `workshop-management-ui`, `company-console`, `integration-adapters`, `api-gateway`.
+
+### Proposed
+
+Named by the owner during Publisher's design review (5 November 2026). Still candidates under the rules above; each gets its responsibility confirmed before a repository exists.
+
+| Candidate | Class | Would own |
+|---|---|---|
+| `scheduler` | Platform | Running every capability's `tasks` on time, like cron, for the host |
+| `workflow` | Platform | User-defined routes for review, sign-off and approval, per type and site; fills capabilities' approval ports |
+| `content-security` | Platform | Scanning what people submit for dangerous content, links and abuse, on top of each layer's own input checks |
+| `export` | Library | Turning a `rich-text` safe tree into files such as PDF and .docx, extensible by format |
+| `privacy` | Foundation | Consent and retention policy, which capabilities receive and apply |
+| `policy-map` | Foundation (IAM) | Policy constraints beside Authorisation's decisions, such as legal holds that block deletion |
+| `doc-search` | Platform | Searching documents |
+| `translate` | Platform | Translation of content and its workflow |
+| `metadata` | Platform | Tags, categories, taxonomies and ontologies attached to content |
+| `notifications` | Platform | Telling people something needs them, through their chosen channels |
+| `events-queue` | Platform | Carrying events between capabilities' outboxes and their consumers |
+| `comments-engine` | Platform | Comments on content |
+| `integrations` | Platform | Adapters to outside services such as Google Docs, Microsoft 365 and social feeds |
+| `seo` | Platform | Redirects, sitemaps and search-engine metadata, driven by Publisher's address events. Suggested in the review; not yet confirmed |
 
 ## Consolidations
 
 - No shared `persistence-service` (ADR-0002). Generic `user-service` and `group-service` are Identity; sessions stay in Authentication.
 - `blog-service` is a Publisher document type; `image-service` and `media-library-ui` are `media`; `storage-service` is `storage`; `todo-manager` belongs in `task-service`.
 - `iam-integration` is unrelated to the general-purpose `integrations` candidate.
+- `scheduling-service` and `job-service` are `scheduler`; `workflow-service` is `workflow`; `notification-service` is `notifications`; `event-bus-service` is `events-queue`.
 - Existing repository names and contracts are kept unless an independently reviewed change justifies a migration.
 
 ## Starting a capability
