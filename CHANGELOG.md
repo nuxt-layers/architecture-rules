@@ -2,6 +2,10 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-06
+
+- Catalogue: the proposed capabilities now have repositories and are listed as capabilities, with a brief purpose each. `policy-map` is renamed `legal-compliance` (legal duties by jurisdiction, such as UK GDPR and the Online Safety Act); `doc-search` returns to the `search-service` candidate; `integration-adapters` is `integrations`.
+
 ## 2026-11-05 (site hosting)
 
 - Catalogue: `site-hosting` proposed, for custom domains and finding a request's site.
