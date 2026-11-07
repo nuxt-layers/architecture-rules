@@ -36,7 +36,7 @@
 | `legal-compliance` | Foundation | The legal duties that apply to each site by jurisdiction, such as UK GDPR and the Online Safety Act, and the constraints they impose beside Authorisation's decisions, such as legal holds that block deletion |
 | `export` | Library | Turning a `rich-text` safe tree into files such as PDF and .docx, extensible by format |
 | `scheduler` | Platform | Running every capability's `tasks` on time, like cron, for the host |
-| `events-queue` | Platform | Carrying events from capabilities' outboxes to their consumers |
+| `message-queue` | Platform | Carrying messages that something happened, such as "password changed", from capabilities' outboxes to the capabilities that listen; not calendar events, which are the `event-service` candidate |
 | `workflow` | Platform | User-defined routes for review, sign-off and approval, per type and site; fills capabilities' approval ports |
 | `content-security` | Platform | Scanning what people submit for dangerous content, links and abuse, on top of each layer's own input checks |
 | `notifications` | Platform | Telling people something needs them, through their chosen channels; providers' keys come from the host's secret management |
@@ -62,7 +62,7 @@ Possible capabilities, not planned: each is built only when an application needs
 - `blog-service` is a Publisher document type; `image-service` and `media-library-ui` are `media`; `storage-service` is `storage`; `todo-manager` belongs in `task-service`.
 - `iam-integration` is unrelated to the general-purpose `integrations` capability.
 - `integration-adapters` is `integrations`; `policy-map` is `legal-compliance`; `doc-search` is the `search-service` candidate.
-- `scheduling-service` and `job-service` are `scheduler`; `workflow-service` is `workflow`; `notification-service` is `notifications`; `event-bus-service` is `events-queue`.
+- `scheduling-service` and `job-service` are `scheduler`; `workflow-service` is `workflow`; `notification-service` is `notifications`; `event-bus-service` and the former `events-queue` are `message-queue`.
 - Existing repository names and contracts are kept unless an independently reviewed change justifies a migration.
 
 ## Starting a capability
