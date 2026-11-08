@@ -47,7 +47,7 @@ Every capability asks for the shared needs in the same structural shapes, writte
 
 A capability declares only the structural services it needs. It never imports a particular caller provider, decision engine, integration suite or scheduler. The composition root connects implementations. The following shapes define common interoperation; each capability may retain additional domain-specific services only when their purpose cannot be expressed by these shapes.
 
-**Caller resolution.** `resolveCaller(event)` returns a trustworthy, server-derived context. It must never accept a client-asserted subject, assurance or tenant as proof. Resolution errors reject. An unauthenticated request has `subjectId: null`, never a fabricated identity.
+**Caller resolution.** `resolveCaller(event)` returns a trustworthy, server-derived context. It must never accept a client-asserted subject, assurance or tenant as proof. Resolution errors reject. An unauthenticated request has `subjectId: null` and `assurance: null`, never a fabricated identity.
 
 ```ts
 type Assurance = {
@@ -55,11 +55,9 @@ type Assurance = {
   phishingResistant: boolean
   authenticatedAt: string | null // UTC ISO 8601 instant; null for unauthenticated calls
 }
-type Caller = {
-  tenantId: string | null
-  subjectId: string | null
-  assurance: Assurance
-}
+type Caller =
+  | { tenantId: string | null; subjectId: null; assurance: null }
+  | { tenantId: string | null; subjectId: string; assurance: Assurance }
 type ResolveCaller<Event = unknown> = (event: Event) => Promise<Caller>
 ```
 
