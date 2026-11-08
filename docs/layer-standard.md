@@ -94,11 +94,19 @@ Each independently developed layer ships `capability.json`, so tooling and hosts
 
 The sample `version` is development metadata, not a published release or consumer pin. It names the manifest schema version, the package, its development metadata version, its class (`foundation`, `platform`, `domain`, `presentation` or `library`), what it provides with contract versions, and what it requires with compatible versions and whether each is optional. Later versions may add configuration schemas, events, runtime needs, security metadata and compatibility evidence.
 
-## 5. Testing
+## 5. Finding and using other layers' contracts
+
+A layer is built from the catalogue and its dependencies' contracts alone, never by reading another repository's code or copying its function:
+
+1. **Check the [catalogue](catalogue.md) first.** If a capability already owns a responsibility, such as `clock` for dates and times, require it; do not reimplement it, even in part. A gap is raised with the owning capability, not worked around.
+2. **Each capability's contract is `CONTRACT.md` at the root of `nuxt-layers/<name>` on `master`**, where `<name>` is its catalogue name. It is the only document a consumer needs, and it is never copied into this or any other repository (ADR-0004).
+3. **Read only what is required.** A layer reads the contracts of the capabilities listed in its own `capability.json` `requires`, not their dependencies' contracts or any other file in those repositories.
+
+## 6. Testing
 
 Each layer has contract tests for its public surface, unit tests for its rules, integration tests for its adapters, compatibility tests for the capabilities it requires, security tests fitting its threat surface, and `examples/minimal-host` proving its composition budget (ADR-0012). A host also tests the composed system.
 
-## 6. Consuming a layer
+## 7. Consuming a layer
 
 During active development, consumers integrate the latest accepted `master` of each dependency (ADR-0008). Local workspace paths may accelerate development, but acceptance testing must resolve the current upstream `master`.
 
@@ -113,7 +121,7 @@ Do not copy another layer's source into an application or use a Git submodule me
 
 Whenever a provider's `master` advances, affected consumers refresh their dependency resolution and run contract, integration, security and acceptance checks. A committed lockfile records the resolved inputs of that check; it must not freeze integration to an older development revision. Failed checks require a fix in the responsible provider or consumer before the consumer's integration is accepted.
 
-## 7. Versioning
+## 8. Versioning
 
 Formal package releases, release tags and compatibility obligations to superseded development revisions are suspended until the project owner approves a release lifecycle (ADR-0008). Contract changes remain explicit, documented and tested, even when breaking changes are expected during development. Contract-version fields describe interface compatibility, not repository dependency pinning; they must be updated when the interface changes.
 

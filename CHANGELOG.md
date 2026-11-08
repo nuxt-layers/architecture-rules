@@ -2,6 +2,10 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-08
+
+- Layer Standard §5: where each capability's `CONTRACT.md` is found, and that a new layer requires an owning capability from the catalogue instead of reimplementing it, reading only the contracts its manifest requires.
+
 ## 2026-11-07
 
 - Catalogue: `events-queue` is renamed `message-queue`, so it is not confused with calendar events such as meetings and workshops (the `event-service` candidate).
