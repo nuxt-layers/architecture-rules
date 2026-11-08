@@ -5,7 +5,8 @@
 **Revised:** 2026-10-25: screens follow the amended ADR-0009; every capability has a one-page host contract  
 **Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
 **Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
-**Amended:** 2026-11-05: files join the shared shapes, filled by `storage`
+**Amended:** 2026-11-05: files join the shared shapes, filled by `storage`  
+**Proposed amendment:** 2026-11-08: define shared caller, decision and scheduled-task semantics (subject to acceptance)
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -41,6 +42,67 @@ Every capability asks for the shared needs in the same structural shapes, writte
 | Scheduled work | `tasks: { name, every, run }[]`, run by the host's one scheduler |
 | Clock | `now()`, defaulting to the system clock |
 | Files | The `StorageService` of `storage`'s contract: the host passes `storageFor('<consumer>')`; the consumer keeps each item's record and storage only the bytes. The consumer never imports `storage` |
+
+### 2a. Shared caller, access and scheduled-task semantics
+
+A capability declares only the structural services it needs. It never imports a particular caller provider, decision engine, integration suite or scheduler. The composition root connects implementations. The following shapes define common interoperation; each capability may retain additional domain-specific services only when their purpose cannot be expressed by these shapes.
+
+**Caller resolution.** `resolveCaller(event)` returns a trustworthy, server-derived context. It must never accept a client-asserted subject, assurance or tenant as proof. Resolution errors reject. An unauthenticated request has `subjectId: null`, never a fabricated identity.
+
+```ts
+type Assurance = {
+  level: 'aal1' | 'aal2'
+  phishingResistant: boolean
+  authenticatedAt: string | null // UTC ISO 8601 instant; null for unauthenticated calls
+}
+type Caller = {
+  tenantId: string | null
+  subjectId: string | null
+  assurance: Assurance
+}
+type ResolveCaller<Event = unknown> = (event: Event) => Promise<Caller>
+```
+
+`tenantId` is a trusted tenant context, **not** a claim that the subject is authorised in that tenant. It may be null where no trusted tenant is resolved; tenant-scoped protected operations refuse such a caller. Providers must not invent a tenant or reuse one from an unrelated request. `authenticatedAt` records the most recent qualifying authentication or step-up, not the session's initial creation time. When missing, expired, invalid or untrustworthy, freshness-dependent operations deny. Assurance can never be elevated by a downstream adapter. No default caller resolver signs anybody in.
+
+**Access decisions.** Every protected operation passes the resolved caller, the action and a resource with an unambiguous owner/tenant scope. The decision engine, not the requesting capability, determines permissions, membership effects and assurance sufficiency. A missing decision provider, exception or unknown result denies the operation; a capability must never convert ambiguity into an allow.
+
+```ts
+type Resource = {
+  type: string
+  id: string
+  tenantId: string | null
+  owningGroupId?: string | null
+}
+type StepUpRequirement = {
+  minimumLevel: 'aal1' | 'aal2'
+  phishingResistant: boolean
+  maxAuthenticationAgeSeconds: number | null
+}
+type Decision =
+  | { allowed: true }
+  | { allowed: false; reason: 'not-permitted' }
+  | { allowed: false; reason: 'insufficient-assurance'; requirement: StepUpRequirement }
+type Decide = (caller: Caller, action: string, resource: Resource) => Promise<Decision>
+```
+
+The decision provider verifies the resource's **authoritative** scope; a caller-supplied `resource.tenantId` or `owningGroupId` is not sufficient evidence of tenancy or ownership. All decisions fail closed across tenant boundaries. Explicitly denying an unknown resource must not expose whether that resource exists. `insufficient-assurance` is only used where its disclosed requirement is permitted; other denial reasons are reduced to `not-permitted` at capability boundaries that must not reveal policy detail. A decision is not a substitute for the domain's transaction, invariant checks or independent governance-approval policy.
+
+**Scheduled work.** A capability describes tasks independently of their executor. The currently accepted minimal shape remains `{ name, every, run }[]`; `every` is a five-field cron expression and `run` is an asynchronous, server-only handler. Names are stable and namespaced by the declaring capability. Registration of duplicate names with conflicting definitions is refused. Neither registering nor importing a capability starts its tasks.
+
+```ts
+type ScheduledTask = {
+  name: string
+  every: string // standard five-field cron expression, interpreted in UTC
+  run(): Promise<unknown>
+}
+```
+
+The executing scheduler owns registration, dispatch, coordination, retries, operational visibility and any execution metadata. It never owns or imports task-specific business logic or reads a capability's private tables. The composition root registers descriptors using the shared shape. The scheduler must not imply exactly-once execution: tasks must tolerate retries and duplicate invocations, and must arrange idempotency or concurrency protection appropriate to their domain. A failed outbox delivery must remain pending, rather than being acknowledged by the scheduler.
+
+This minimal descriptor does **not** standardise retry counts, timeouts, cancellation signals, per-task concurrency, distributed leases, time zones beyond UTC or an interval/one-shot syntax. Those are Scheduler-owned execution design decisions or future explicit amendments, not implicit fields to be invented by individual capabilities. Calendar/date calculations must follow the platform's existing temporal semantics rather than duplicating a date/time capability.
+
+The common shapes here are a cross-capability baseline. A suite's integration package may adapt its members to them but owns no member's permission policy, identity records, database or scheduled business work. Existing more specific public interfaces may be retained during migration; adoption must preserve their assurance checks, independent approvals, event reliability and isolation. A changed shared shape requires affected consumer integration and security acceptance under ADR-0008.
 
 ### 3. Capabilities fill their own ports
 
