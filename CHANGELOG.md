@@ -2,6 +2,11 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-08 (clock)
+
+- Clarified `clock`'s bounded ownership in the capability catalogue without duplicating its public format contract.
+- Added TypeScript 6.0.3 as the preferred development and CI toolchain baseline, subject to per-repository compatibility verification.
+
 ## 2026-11-08
 
 - Layer Standard §5: where each capability's `CONTRACT.md` is found, and that a new layer requires an owning capability from the catalogue instead of reimplementing it, reading only the contracts its manifest requires.

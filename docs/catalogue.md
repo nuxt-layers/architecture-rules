@@ -18,7 +18,7 @@
 | Capability | Class | Owns |
 |---|---|---|
 | `theme-manager` | Foundation | Theme definitions, the semantic token vocabulary, contrast checks, selection and preferences; the only authority for the effective theme |
-| `clock` | Foundation | Canonical date/time values, strict parsing, localisation, IANA time-zone conversion, calendar arithmetic and an injectable clock |
+| `clock` | Foundation | Canonical date/time values, parsing, formatting, temporal arithmetic, time zones and clock services |
 | `configuration` | Foundation | The facts a site, tenant or group states about itself, changed through approvals |
 | `identity` | Foundation (IAM) | Identities, each person's personal group, groups, the single-parent hierarchy, tenants and memberships with their lifecycle; no personal data beyond opaque identifiers |
 | `authentication` | Foundation (IAM) | Credential verification, sign-in identifiers, sessions, rotation, revocation and reauthentication |

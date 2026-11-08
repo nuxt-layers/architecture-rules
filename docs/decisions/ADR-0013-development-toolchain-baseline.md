@@ -1,7 +1,8 @@
 # ADR-0013 — Development Toolchain Baseline
 
 **Status:** Accepted  
-**Date:** 2026-10-31
+**Date:** 2026-10-31  
+**Proposed amendment:** 2026-11-08: include TypeScript 6.0.3 in the development baseline
 
 > **In short:** active development and CI use Node.js 26 LTS and pnpm 12, while consumer runtime requirements are stated and verified separately.
 
@@ -11,10 +12,10 @@ A common, supported toolchain simplifies ecosystem integration and reduces expos
 
 ## The decision
 
-1. The ecosystem's preferred development and CI baseline is Node.js 26 LTS and pnpm 12. Adopt the current supported patch releases after compatibility verification.
-2. Capability repositories declare their package-manager requirements and use the same major versions locally and in CI.
+1. The ecosystem's preferred development and CI baseline is Node.js 26 LTS, pnpm 12 and TypeScript 6.0.3. Adopt further supported patch releases after compatibility verification.
+2. Capability repositories declare their package-manager and TypeScript development requirements and use the accepted baselines locally and in CI after compatibility verification. TypeScript 6.0.3 is a development target, not a consumer runtime requirement.
 3. Consumer minimum Node.js requirements follow the capability's actual runtime dependencies and Nuxt's documented requirements; do not raise them solely to match the development baseline.
-4. Migrations proceed by affected repository, with contract, integration, security and acceptance checks. A green toolchain upgrade in one repository does not certify all consumers.
+4. Migrations proceed by affected repository, with contract, integration, security and acceptance checks. Where the accepted TypeScript baseline is not yet compatible with a repository's toolchain, record the incompatibility and retain its functioning development configuration until the dependency is resolved. A green toolchain upgrade in one repository does not certify all consumers.
 5. CI must honour organisation Actions restrictions; third-party actions are not introduced merely for package-manager setup. Full SHA pins remain required for permitted actions.
 
 ## Adopting it
