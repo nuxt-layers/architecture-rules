@@ -4,7 +4,8 @@ Major changes, newest first. This repository has no releases; each entry is date
 
 ## 2026-11-08 (clock)
 
-- Catalogue: `clock` also owns explicit date patterns, protocol date formats (RFC 3339, JWT `NumericDate`, HTTP, email, X.509) and DST resolution, so other layers require it instead of reimplementing them.
+- Clarified `clock`'s bounded ownership in the capability catalogue without duplicating its public format contract.
+- Added TypeScript 6.0.3 as the preferred development and CI toolchain baseline, subject to per-repository compatibility verification.
 
 ## 2026-11-08
 
