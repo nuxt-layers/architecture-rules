@@ -2,6 +2,10 @@
 
 Major changes, newest first. This repository has no releases; each entry is dated.
 
+## 2026-11-08 (clock)
+
+- Catalogue: `clock` also owns explicit date patterns, protocol date formats (RFC 3339, JWT `NumericDate`, HTTP, email, X.509) and DST resolution, so other layers require it instead of reimplementing them.
+
 ## 2026-11-08
 
 - Layer Standard §5: where each capability's `CONTRACT.md` is found, and that a new layer requires an owning capability from the catalogue instead of reimplementing it, reading only the contracts its manifest requires.
