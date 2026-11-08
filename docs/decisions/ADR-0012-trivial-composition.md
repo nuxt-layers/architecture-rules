@@ -6,7 +6,7 @@
 **Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
 **Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
 **Amended:** 2026-11-05: files join the shared shapes, filled by `storage`  
-**Proposed amendment:** 2026-11-08: clarify provider-neutral composition and ownership boundaries (subject to acceptance)
+**Amended:** 2026-11-08: clarified provider-neutral composition and ownership boundaries
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -57,7 +57,7 @@ The detailed meaning of caller fields, resource and decision types, task schedul
 
 Each capability ships, in its own package:
 
-- a PostgreSQL implementation of its stores, used when it is given a pool;
+- for capabilities that own PostgreSQL-persisted state, an implementation of their own stores, used when given a pool (stateless capabilities do not need a database);
 - fakes of every port for tests, refused outside test configuration (ADR-0002, decision 2);
 - a recording mail sender and caller resolver for tests and demonstrations.
 
@@ -98,7 +98,7 @@ A suite's integration repository composes its members only after their independe
 
 | Gains | Costs |
 |---|---|
-| Composing a capability is quick, cheap and predictable, for people and for agents | Each capability gains a PostgreSQL store, fakes and an example host to maintain |
+| Composing a capability is quick, cheap and predictable, for people and for agents | Stateful capabilities maintain their stores; every capability maintains appropriate test fakes and an example host |
 | One access decision and one caller resolver serve every capability | The shared shapes must be agreed before the pilot, and changing one touches every contract |
 | Applications hold product code, not plumbing | Consumer contracts require review for both completeness and unnecessary detail |
 | Combinations proven in the harness carry straight into applications | Breaking changes require immediate consumer integration and corrections |
