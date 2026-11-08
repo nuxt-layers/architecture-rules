@@ -5,7 +5,8 @@
 **Revised:** 2026-10-25: screens follow the amended ADR-0009; every capability has a one-page host contract  
 **Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
 **Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
-**Amended:** 2026-11-05: files join the shared shapes, filled by `storage`
+**Amended:** 2026-11-05: files join the shared shapes, filled by `storage`  
+**Proposed amendment:** 2026-11-08: clarify provider-neutral composition and ownership boundaries (subject to acceptance)
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -41,6 +42,16 @@ Every capability asks for the shared needs in the same structural shapes, writte
 | Scheduled work | `tasks: { name, every, run }[]`, run by the host's one scheduler |
 | Clock | `now()`, defaulting to the system clock |
 | Files | The `StorageService` of `storage`'s contract: the host passes `storageFor('<consumer>')`; the consumer keeps each item's record and storage only the bytes. The consumer never imports `storage` |
+
+### 2a. Provider-neutral security and operational composition
+
+Shared shapes are **composition boundaries**, not ownership of another capability's detailed interface or implementation. A capability declares the services it needs, and the composition root connects providers through documented public contracts. Neither side imports another capability's private code, schema or infrastructure implementation.
+
+Caller and access-decision providers must establish trustworthy server-side context and preserve the requesting capability's applicable assurance, tenant isolation and security requirements. No adapter may fabricate identity, elevate assurance, assume resource ownership or convert a missing, failed or ambiguous decision into permission. Domain invariants and any required independent approvals remain the responsibility of the capability that owns the operation.
+
+A capability owns its business events, durable outbox and scheduled task handlers. Independently composable transport and execution capabilities may deliver published messages or run registered tasks through public interfaces, but never take ownership of the originating capability's business rules or persistence. A host must not reimplement those operations merely to compose capabilities.
+
+The detailed meaning of caller fields, resource and decision types, task schedule syntax, execution coordination, message acknowledgements and delivery policies belongs to the responsible capability's `CONTRACT.md` and its own design. Where two capabilities must interoperate, their published contracts must be reconciled without introducing circular dependencies. Shared shapes change through an explicit architectural review under ADR-0008, with affected-consumer acceptance before integration is considered complete.
 
 ### 3. Capabilities fill their own ports
 
