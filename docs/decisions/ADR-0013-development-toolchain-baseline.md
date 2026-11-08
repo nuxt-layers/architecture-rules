@@ -2,9 +2,9 @@
 
 **Status:** Accepted  
 **Date:** 2026-10-31  
-**Proposed amendment:** 2026-11-08: include TypeScript 6.0.3 in the development baseline
+**Amended:** 2026-11-08: included TypeScript 6.0.3 in the development baseline
 
-> **In short:** active development and CI use Node.js 26 LTS and pnpm 12, while consumer runtime requirements are stated and verified separately.
+> **In short:** active development and CI target Node.js 26 LTS, pnpm 12 and TypeScript 6.0.3, with per-repository compatibility checks; consumer runtime requirements are verified separately.
 
 ## Why
 
