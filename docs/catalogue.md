@@ -47,6 +47,14 @@
 | `site-hosting` | Platform | Where each site is served: custom domains, proving their ownership, and finding the site for a request's address; certificates and deployment stay with the host's proxy and provider (ADR-0014) |
 | `integrations` | Platform | Adapters to outside services such as Google Docs, Microsoft 365 and social feeds |
 
+## Infrastructure integration libraries
+
+These are framework-independent packages, not independently composable Nuxt capabilities; their ownership and requirements follow [ADR-0015](decisions/ADR-0015-infrastructure-integration-libraries.md).
+
+| Library | Owns |
+|---|---|
+| `temporal-gateway` | Shared Temporal connection, schedule, execution and worker SDK integration; no business scheduling, workflows, message transport or capability-owned persistence |
+
 ## Candidates
 
 Possible capabilities, not planned: each is built only when an application needs it and its bounded responsibility is established (below). The candidate names are provisional; definitions belong in their eventual capability repositories.
