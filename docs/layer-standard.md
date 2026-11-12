@@ -1,6 +1,6 @@
 # Layer Standard
 
-> **In short:** what a layer is, how its repository is laid out and documented, what it offers and keeps private, what its manifest says, and how an application consumes it. It replaces the layer architecture, layer interface standard, capability manifest, layer repository standard, layer consumption workflow and compatibility and versioning standard. The decisions it rests on are ADR-0001, ADR-0002, ADR-0008, ADR-0009 and ADR-0012.
+> **In short:** what a layer is, how its repository is laid out and documented, what it offers and keeps private, what its manifest says, and how an application consumes it. It replaces the layer architecture, layer interface standard, capability manifest, layer repository standard, layer consumption workflow and compatibility and versioning standard. The decisions it rests on are ADR-0001, ADR-0002, ADR-0008, ADR-0009, ADR-0012, ADR-0015 and ADR-0016.
 
 **Status:** Normative
 
@@ -68,7 +68,7 @@ Rules:
 └── package.json
 ```
 
-Only the directories the capability needs exist. Packages use the `@nuxt-layers/` scope; repository names are short capability names, and repository and package boundaries align. Every imported dependency is declared.
+Only the directories the capability needs exist. Packages use the `@nuxt-layers/` scope; repository names are short capability names, and repository and package boundaries align. Every imported dependency is declared. Deliberate Nuxt `extends` relationships are also documented separately from capability contract requirements (ADR-0016).
 
 Each independently developed layer documents:
 
@@ -83,7 +83,7 @@ Default branches are protected; material changes come through pull requests, and
 
 ## 4. The manifest
 
-Each independently developed layer ships `capability.json`, so tooling and hosts can reason about what it provides and needs. It agrees with the human-readable contract and package metadata, and never overrides them.
+Each independently developed layer ships `capability.json`, so tooling and hosts can reason about what it provides and needs. Its `requires` entries describe contract dependencies, not Nuxt inheritance; a direct extension edge is separately declared and documented, using a manifest extension field only once its schema has been approved (ADR-0016). It agrees with the human-readable contract and package metadata, and never overrides them.
 
 ```json
 {
@@ -106,9 +106,13 @@ A layer is built from the catalogue and its dependencies' contracts alone, never
 2. **Each capability's contract is `CONTRACT.md` at the root of `nuxt-layers/<name>` on `master`**, where `<name>` is its catalogue name. It is the only document a consumer needs, and it is never copied into this or any other repository (ADR-0004).
 3. **Read only what is required.** A layer reads the contracts of the capabilities listed in its own `capability.json` `requires`, not their dependencies' contracts or any other file in those repositories.
 
+## 5a. Specialisation and inheritance
+
+Explicit capability contract dependencies are distinct from Nuxt Layer extension edges. A reusable archetype MAY declare schema-validated specialisations, and a Nuxt Layer MAY intentionally `extends` another layer only through a documented public extension surface (ADR-0016). The extending layer must record inherited contributions, merge/override precedence, registration and disabling behaviour, and which host prerequisites remain required. No inherited private implementation, storage, security guarantees or business ownership is transferred. Existing completed contracts remain unchanged.
+
 ## 6. Testing
 
-Each layer has contract tests for its public surface, unit tests for its rules, integration tests for its adapters, compatibility tests for the capabilities it requires, security tests fitting its threat surface, and `examples/minimal-host` proving its composition budget (ADR-0012). A host also tests the composed system.
+Each layer has contract tests for its public surface, unit tests for its rules, integration tests for its adapters, compatibility tests for the capabilities it requires, security tests fitting its threat surface, and `examples/minimal-host` proving its composition budget (ADR-0012). For intentional Nuxt `extends`, tests also prove inherited public behaviour, configuration precedence, absence of duplicate registrations, disabled-presentation behaviour where relevant and a combined acyclic dependency graph (ADR-0016). A host also tests the composed system.
 
 ## 7. Consuming a layer
 
@@ -121,7 +125,7 @@ During active development, consumers integrate the latest accepted `master` of e
 | Its own repository | A Git-backed dependency following the latest accepted `master` |
 | A future published release | Governed by a separate release decision when releases resume |
 
-Do not copy another layer's source into an application or use a Git submodule merely to avoid dependency integration. Direct remote `extends` remains exceptional and must be justified and tested.
+Do not copy another layer's source into an application or use a Git submodule merely to avoid dependency integration. Direct remote `extends` remains exceptional and must be justified and tested against the public extension surface and combined acyclic dependency graph under ADR-0016. Nuxt inheritance is not a replacement for published service contracts or host-supplied ports.
 
 Whenever a provider's `master` advances, affected consumers refresh their dependency resolution and run contract, integration, security and acceptance checks. A committed lockfile records the resolved inputs of that check; it must not freeze integration to an older development revision. Failed checks require a fix in the responsible provider or consumer before the consumer's integration is accepted.
 
