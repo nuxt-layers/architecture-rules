@@ -16,7 +16,11 @@ A layer is a Nuxt Layer implementing one bounded capability. It gets its own rep
 | Presentation | Screens and components over capabilities' contracts, owning no data | `ui`, `content-editor`, `gallery` |
 | Library | Stateless packages with no storage, ports or screens | `rich-text` |
 
-Foundation, Platform and Domain layers are capabilities: a headless core with an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)).
+Foundation, Platform and Domain layers are capabilities: a headless core with an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)). The Library row describes ADR-0011 stateless libraries, not infrastructure integration libraries.
+
+### Infrastructure integration libraries
+
+A framework-independent infrastructure integration library is a separate package kind under [ADR-0015](decisions/ADR-0015-infrastructure-integration-libraries.md). It may manage external SDK connections and worker lifecycles without owning business rules or data. It is **not a Nuxt Layer**, has no capability classification or `capability.json`, and does not need `nuxt.config.ts`, Nuxt host composition tests or a presentation part. It uses explicit compiled exports, a self-contained `CONTRACT.md`, independent Node.js consumer and integration tests, and the applicable security, privacy and dependency rules. ADR-0012's shared structural ports remain unchanged.
 
 ## 2. Public surface and contracts
 

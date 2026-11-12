@@ -9,13 +9,14 @@
 | Part | Does |
 |---|---|
 | **Capabilities** | Own one bounded responsibility each, with a headless core and an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)). Classified Foundation, Platform or Domain |
-| **Presentation layers and libraries** | Draw screens over capabilities' contracts, or provide stateless shared formats such as `rich-text` |
+| **Presentation layers and stateless libraries** | Draw screens over capabilities' contracts, or provide stateless shared formats such as `rich-text` (ADR-0011) |
+| **Infrastructure integration libraries** | Framework-independent packages for shared external-system integration, such as `temporal-gateway`; not Nuxt Layers or business capabilities ([ADR-0015](decisions/ADR-0015-infrastructure-integration-libraries.md)) |
 | **Suites** | Capabilities designed together, such as the IAM suite, wired once by their integration package ([ADR-0005](decisions/ADR-0005-iam-suite.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)) |
 | **Applications** | Composition roots: select the latest accepted development revisions, pass connections, secrets, configuration and application decisions, set routes and branding, and deploy. Domain behaviour never defaults to the application |
 
 ## 2. Invariants
 
-1. A layer is a bounded capability, not a convenient collection of files.
+1. A capability layer is a bounded capability, not a convenient collection of files. Stateless libraries and infrastructure integration libraries are separate package kinds (ADR-0011, ADR-0015).
 2. Layers interact only through declared public contracts, ports and events, never another layer's private code, storage or schema.
 3. Dependencies form a directed acyclic graph. If two capabilities seem to need each other, move the shared contract to a boundary, use an event or port, or redraw the boundary.
 4. A dependency targets a capability's contract, not how it is built or deployed: a capability needing access decisions asks for the shared `decide` shape, and the deciding capability learns nothing of its internals.
