@@ -1,20 +1,19 @@
 # ADR-0016 — Controlled Layer Specialisation and Composition
 
-**Status:** Proposed — pending acceptance of the accompanying architecture-rules pull request  
+**Status:** Accepted (upon merge of the accompanying approved architecture-rules pull request)  
 **Date:** 2026-11-12
 
 > **In short:** explicit contract dependencies remain the default. Declarative specialisation and deliberate Nuxt Layer `extends` are permitted when they preserve independent capability ownership, public boundaries, security and an acyclic dependency graph. This decision changes no existing capability contract.
 
-## Context
+## Why
 
 Accepted ADR-0015 separately establishes framework-independent infrastructure integration libraries, including Temporal Gateway, as distinct from Nuxt capability layers. ADR-0016 concerns controlled Nuxt inheritance and declarative specialisation and does not change ADR-0015's package-classification, contract, testing or ownership rules.
-
 
 ADR-0001 and ADR-0012 already permit one-way, contract-based dependencies connected by the application composition root. The Architecture overview nevertheless prohibits any chain of Nuxt Layers extending other layers. That blanket restriction unnecessarily prevents deliberate reuse of presentation, configuration and application compositions, especially for specialised organisational archetypes.
 
 Nuxt `extends` merges framework contributions; it is **not** domain inheritance, delegation of an authoritative service, or a substitute for a documented public contract. Inheriting code or configuration does not grant rights over its owner's state or business rules.
 
-## Decision
+## The decision
 
 1. **Contract consumption is the default.** A capability MAY require or optionally consume another capability's documented public service, port, event or data contract. The composition root supplies or resolves the provider as required by ADR-0012. Existing dependency declarations, contract-only integration and independently owned persistence remain mandatory.
 2. **Declarative specialisation is permitted.** Archetypes or configuration can specialise an organisational type, workflow, presentation or application composition through explicit, validated extension points. An archetype does not own Identity groups, grant permissions or substitute for an applicable domain capability.
@@ -36,11 +35,19 @@ Nuxt `extends` merges framework contributions; it is **not** domain inheritance,
 
 Prefer composition and explicit public contracts to long inheritance chains. Nuxt `extends` is not the default mechanism for domain-to-domain integration.
 
-## Scope and migration
+## Adopting it
 
 This ADR is **permissive**, not a migration instruction. Completed layers and their `CONTRACT.md`, manifests and implementation MUST NOT be changed solely because controlled inheritance is now allowed. Any later change to a completed capability requires its own independently justified review.
 
-The general rules in ADR-0001, ADR-0002, ADR-0008, ADR-0009, ADR-0012 and ADR-0015 remain in force except the former categorical ban on Nuxt extension in `docs/architecture.md` §2.5, which this decision expressly replaces. It does not remove host composition, public-contract encapsulation, the modular-monolith default, or the acyclic graph requirement.
+The general rules in ADR-0001, ADR-0002, ADR-0008, ADR-0009, ADR-0012 and ADR-0015 remain in force except the former categorical ban on Nuxt extension in Architecture §2 invariant 5, which this decision expressly replaces. It does not remove host composition, public-contract encapsulation, the modular-monolith default, or the acyclic graph requirement.
+
+## What follows
+
+| Gains | Costs |
+|---|---|
+| Deliberate reuse of documented Nuxt configuration and presentation composition | Explicit extension contracts, merge precedence and integration tests |
+| Declarative organisational specialisation without duplicated domain ownership | Review of archetype schemas and required capability providers |
+| Contract-based service composition and security boundaries remain authoritative | More edges to include in dependency and compatibility checks |
 
 ## Guardrails
 
