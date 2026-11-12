@@ -18,15 +18,15 @@
 
 1. A capability layer is a bounded capability, not a convenient collection of files. Stateless libraries and infrastructure integration libraries are separate package kinds (ADR-0011, ADR-0015).
 2. Layers interact only through declared public contracts, ports and events, never another layer's private code, storage or schema.
-3. Dependencies form a directed acyclic graph. If two capabilities seem to need each other, move the shared contract to a boundary, use an event or port, or redraw the boundary.
+3. Dependencies form a directed acyclic graph, counting both public-contract dependencies and direct Nuxt extension edges. If two capabilities seem to need each other, move the shared contract to a boundary, use an event or port, or redraw the boundary (ADR-0016).
 4. A dependency targets a capability's contract, not how it is built or deployed: a capability needing access decisions asks for the shared `decide` shape, and the deciding capability learns nothing of its internals.
-5. Composition, not inheritance: Nuxt `extends` is a mechanism, never a chain of layers extending layers. The host combines peer capabilities, each filling its own ports by default; hosts write no adapters (ADR-0012).
+5. Prefer contract-based composition to inheritance. A layer MAY deliberately specialise a published extension surface or use Nuxt `extends` for documented configuration/presentation/composition reuse under [ADR-0016](decisions/ADR-0016-controlled-layer-specialisation-and-composition.md). This never grants access to private capability internals or transfers domain ownership. The host still composes capability ports within ADR-0012's budget.
 6. Authentication, Identity and Authorisation are separate capabilities, even where one package wires them together. A person may belong to any number of groups, and access can express ownership by a person or group, roles and permissions, and resource-specific rules.
 7. Access is decided on the server. Client-side checks are for the experience only.
 8. Every persistent resource needing isolation has explicit ownership and access rules.
 9. Infrastructure is replaceable through ports where practical. Capabilities depend on their own stores, not a hosting vendor's API. PostgreSQL is the preferred relational database; row-level security may add protection but never replaces application authorisation.
 10. Security, privacy, accessibility and internationalisation are designed in from the start, never added late.
-11. A capability declares what it provides and requires, with optional dependencies marked and behaviour without them documented. Its failures are documented codes; internal exceptions never cross a boundary.
+11. A capability declares what it provides and requires, with optional dependencies marked and behaviour without them documented. Any deliberate Nuxt extension relationship is separately declared and tested under ADR-0016. Its failures are documented codes; internal exceptions never cross a boundary.
 
 ## 3. Deployment
 
