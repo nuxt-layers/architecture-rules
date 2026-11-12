@@ -89,7 +89,7 @@ Every capability has a root `CONTRACT.md` containing the **shortest complete des
 
 Detailed internal specifications stay under `docs/` for maintainers and do not define a competing consumer interface. The public contract contains precise available imports, required port shapes, callable signatures, inputs, outputs, failure codes and relevant operational requirements; examples must not conceal required configuration or undefined dependencies. If the public contract, internal specification or implementation disagree, reconcile them against the accepted ADRs and normative capability requirements before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
 
-### 5a. Controlled specialisation does not bypass composition
+### 7. Controlled specialisation does not bypass composition
 
 [ADR-0016](ADR-0016-controlled-layer-specialisation-and-composition.md) permits documented public Nuxt extension surfaces and declarative archetypes. These are separate from capability-service port dependencies. A consumer that extends a presentation or composition layer still accounts for all host code needed to initialise its capabilities within the 50-line-per-capability budget, declares direct extension edges, and validates required providers, configuration and registration. No transitive inheritance silently satisfies a required service port, imports private code or transfers ownership. Existing completed layers require no migration solely because extension is permitted.
 
