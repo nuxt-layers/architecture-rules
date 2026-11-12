@@ -2,7 +2,8 @@
 
 **Status:** Accepted  
 **Date:** 2026-09-26  
-**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions
+**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions  
+**Amended:** 2026-11-12: ADR-0016 permits documented Nuxt extension without changing service composition
 
 > **In short:** capabilities live in their own repositories when independence earns it, and applications stay thin composition roots that select capabilities, pass infrastructure and own routes and branding. Layers meet only through public contracts; the default runtime is one modular monolith.
 
@@ -36,4 +37,4 @@ The default runtime remains a modular monolith. A separate repository does not m
 
 A new repository requires a bounded-capability justification. Microscopic repositories are discouraged.
 
-The dependency graph must remain acyclic, and capabilities are connected through their ports by the host's composition call ([ADR-0012](ADR-0012-trivial-composition.md)), never by mutual domain dependencies.
+The combined dependency graph (including contract requirements and direct Nuxt extension edges) must remain acyclic. Capability services are connected through their public ports by the host's composition call ([ADR-0012](ADR-0012-trivial-composition.md)), never by mutual domain dependencies. Deliberate Nuxt `extends` for documented public framework contributions and schema-validated specialisation are permitted under [ADR-0016](ADR-0016-controlled-layer-specialisation-and-composition.md); this does not grant access to private implementation or alter domain ownership.

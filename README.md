@@ -9,7 +9,7 @@
 The ecosystem is bounded capabilities, built as Nuxt Layers, that evolve independently and are combined into light Nuxt applications. Every capability and application:
 
 - is organised around bounded capabilities with clear public contracts, keeping private implementation inside each layer;
-- keeps dependencies one-way and free of cycles, and combines capabilities rather than building inheritance chains;
+- keeps all contract and Nuxt extension dependencies explicit, one-way and free of cycles; composes capabilities by default and permits documented, controlled specialisation under ADR-0016;
 - keeps infrastructure replaceable where practical;
 - enforces security on the server, to **OWASP ASVS 5.0** Level 2 at least, with Level 3 for security-sensitive operations;
 - designs for privacy from the start;
@@ -43,5 +43,5 @@ This repository holds only what applies to the whole ecosystem. A capability's c
 | [Privacy](docs/privacy.md) | Data protection by design |
 | [Presentation, Internationalisation and Accessibility](docs/presentation.md) | Design tokens, languages, WCAG and the screen checklist |
 | [Capability Catalogue](docs/catalogue.md) | The capabilities that exist, the candidates, and the rules for starting one |
-| [Decisions](docs/decisions/) | One file per Architecture Decision Record, in number order; ADR-0008 governs development integration and ADR-0013 the development toolchain baseline and ADR-0014 hosting and storage providers |
+| [Decisions](docs/decisions/) | One file per Architecture Decision Record, in number order; ADR-0008 governs development integration, ADR-0013 the development toolchain baseline, ADR-0014 hosting and storage providers, ADR-0015 infrastructure integration libraries, and ADR-0016 controlled specialisation |
 | [Resources](RESOURCES.md) | Verified, accessible external documents relied on |
