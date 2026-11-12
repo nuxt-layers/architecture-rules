@@ -7,7 +7,7 @@
 **Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
 **Amended:** 2026-11-05: files join the shared shapes, filled by `storage`  
 **Amended:** 2026-11-08: clarified provider-neutral composition and ownership boundaries  
-**Proposed clarification:** 2026-11-12: ADR-0016-controlled extension remains subject to the composition budget
+**Amended:** 2026-11-12: ADR-0016-controlled extension remains subject to the composition budget
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
