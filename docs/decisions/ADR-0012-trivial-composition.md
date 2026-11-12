@@ -6,7 +6,8 @@
 **Accepted:** 2026-10-25, with the host contract's limit raised from 150 to 200 lines  
 **Amended:** 2026-10-31: replace the line ceiling with a concise, complete, independently usable consumer contract  
 **Amended:** 2026-11-05: files join the shared shapes, filled by `storage`  
-**Amended:** 2026-11-08: clarified provider-neutral composition and ownership boundaries
+**Amended:** 2026-11-08: clarified provider-neutral composition and ownership boundaries  
+**Proposed clarification:** 2026-11-12: ADR-0016-controlled extension remains subject to the composition budget
 
 > **In short:** composing a capability into an application must be trivial and measured. A host installs it, makes one call with what it already has (a database connection, the mail sender, the access decision) and writes no adapters of its own. Every capability fills its own ports by default, every capability asks for the same few things in the same shapes, and its tests prove a minimal host composes it within a fixed budget.
 
@@ -87,6 +88,10 @@ Every capability has a root `CONTRACT.md` containing the **shortest complete des
 | You will hit this | Rules a host would otherwise discover by failing: identifier formats, name patterns, what needs a second person or step-up |
 
 Detailed internal specifications stay under `docs/` for maintainers and do not define a competing consumer interface. The public contract contains precise available imports, required port shapes, callable signatures, inputs, outputs, failure codes and relevant operational requirements; examples must not conceal required configuration or undefined dependencies. If the public contract, internal specification or implementation disagree, reconcile them against the accepted ADRs and normative capability requirements before acceptance. Implementation is evidence, not architectural authority. A handover to compose a capability names its `CONTRACT.md` and nothing else of the capability's.
+
+### 5a. Controlled specialisation does not bypass composition
+
+[ADR-0016](ADR-0016-controlled-layer-specialisation-and-composition.md) permits documented public Nuxt extension surfaces and declarative archetypes. These are separate from capability-service port dependencies. A consumer that extends a presentation or composition layer still accounts for all host code needed to initialise its capabilities within the 50-line-per-capability budget, declares direct extension edges, and validates required providers, configuration and registration. No transitive inheritance silently satisfies a required service port, imports private code or transfers ownership. Existing completed layers require no migration solely because extension is permitted.
 
 ## Adopting it
 
