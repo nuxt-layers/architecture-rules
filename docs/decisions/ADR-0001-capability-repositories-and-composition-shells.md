@@ -3,7 +3,7 @@
 **Status:** Accepted  
 **Date:** 2026-09-26  
 **Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions  
-**Proposed clarification:** 2026-11-12: ADR-0016 permits documented Nuxt extension without changing service composition
+**Amended:** 2026-11-12: ADR-0016 permits documented Nuxt extension without changing service composition
 
 > **In short:** capabilities live in their own repositories when independence earns it, and applications stay thin composition roots that select capabilities, pass infrastructure and own routes and branding. Layers meet only through public contracts; the default runtime is one modular monolith.
 
