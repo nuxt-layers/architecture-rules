@@ -1,6 +1,6 @@
 # ADR-0016 — Controlled Layer Specialisation and Composition
 
-**Status:** Accepted (upon merge of the accompanying approved architecture-rules pull request)  
+**Status:** Accepted  
 **Date:** 2026-11-12
 
 > **In short:** explicit contract dependencies remain the default. Declarative specialisation and deliberate Nuxt Layer `extends` are permitted when they preserve independent capability ownership, public boundaries, security and an acyclic dependency graph. This decision changes no existing capability contract.
