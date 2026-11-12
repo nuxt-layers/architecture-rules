@@ -93,7 +93,7 @@ These are distinct edges: `requires` is not synonymous with Nuxt `extends`, and 
 
 ## Candidates
 
-These names and descriptions are **design options**, not approved independent repositories, mandatory dependencies or delivery commitments. The candidate names follow the supplied CSV where meaningful; existing contracts and accepted ADRs take precedence.
+These names and descriptions are **design options**, not approved independent repositories, mandatory dependencies or delivery commitments. Established capabilities are listed once in the authoritative table above; their existing responsibilities are neither reclassified nor extended by these candidate definitions. Candidate names follow the supplied CSV where meaningful; existing contracts and accepted ADRs take precedence.
 
 ### Foundation, platform and library candidates
 
@@ -104,33 +104,18 @@ These names and descriptions are **design options**, not approved independent re
 | `logging` | Foundation | Structured technical logs, correlation and sinks; not the authoritative business audit trail |
 | `observability` | Platform | Metrics, traces, system health and diagnostics; not logging or business auditing |
 | `uuidv7-generator` | Library candidate | UUIDv7 identifier generation; not ownership of entities or credentials, and not automatically a Nuxt Layer |
-| `legal-compliance` | Foundation | Jurisdictional legal requirements and policy constraints, including holds; does not take over Authorisation |
-| `privacy` | Foundation | Consent and retention policies and their enforcement contracts; private personal records stay with Profile |
 | `api-gateway` | Composition / platform to decide | External API routing and exposure; not a replacement for capability APIs or server authorisation |
 | `application-compositions` | Composition artefacts | Reusable application templates and selected capability wiring; generally not independent stateful services |
 | `company-console` | Presentation | Cross-capability management screens; no business records |
 | `user` | Presentation | Group-scoped user administration screens via Identity/Profile/Authorisation; no user records |
-| `comments-engine` | Platform | Comments, threads, moderation and reply history on referenced resources |
-| `content-security` | Platform | Content risk scanning and abuse screening; supplements rather than replaces capability validation |
 | `document` | Platform candidate, unresolved | Distinct document-management requirement only if Publisher's document lifecycle is insufficient |
-| `media` | Platform | Image handling and variants; file bytes remain the responsibility of Storage |
-| `metadata` | Platform | Reusable tags, classification, taxonomies and associations; no ownership of annotated content |
 | `search` | Platform | Indexing, query and relevance over authorised source records; no source-of-truth storage |
-| `seo` | Platform | Sitemaps, redirects and search metadata from Publisher address facts |
-| `translate` | Platform | Content translation and review; not application message localisation |
-| `integrations` | Platform | External-provider adapters and synchronisation plumbing; domain meaning stays with owning capabilities |
 | `location` | Platform | Coordinates, geospatial and place references; not all postal addresses or site tenancy |
 | `reporting` | Platform | Authorised report definitions, aggregation and output; no source transaction records |
-| `site-hosting` | Platform | Domain verification and site lookup; certificate/hosting provider ownership stays with the host |
-| `notifications` | Platform | User-facing notification routing, channel selection and delivery; no external-provider secrets |
 | `process` | Platform candidate | Business process definitions and outcomes; execution uses Workflow/Scheduler without duplicating their responsibilities |
 | `project` | Platform candidate | Coordinated bodies of work, milestones, responsibilities and budgets; uses Task/Process contracts where applicable |
 | `task` | Platform candidate | Individual assigned work, goals, progress and due dates; not Temporal jobs or scheduler triggers |
 | `booking` | Domain candidate | Reservation lifecycle, availability and capacity for resources; neither a clock nor execution scheduler |
-| `export` | Library | Safe rich-text tree conversion to export formats; does not own authored documents |
-| `ui` | Presentation | Generic theme-vocabulary components, unaware of specific capability data |
-| `content-editor` | Presentation | Publisher document editing through Publisher's public contract |
-| `gallery` | Presentation | Publisher gallery document types over Media images |
 
 ### Organisational and activity domain candidates
 
