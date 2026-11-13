@@ -6,7 +6,7 @@
 
 ## Principles
 
-The ecosystem is bounded capabilities, built as Nuxt Layers, that evolve independently and are combined into light Nuxt applications. Every capability and application:
+The ecosystem consists of bounded capabilities with public contracts. Nuxt Layers are one implementation option; applications compose the capabilities they need. Every capability and application:
 
 - is organised around bounded capabilities with clear public contracts, keeping private implementation inside each layer;
 - keeps all contract and Nuxt extension dependencies explicit, one-way and free of cycles; composes capabilities by default and permits documented, controlled specialisation under ADR-0016;
@@ -22,7 +22,7 @@ Where documents conflict, authority descends in this order:
 
 1. an accepted Architecture Decision Record, for the decision it settles;
 2. the [Architecture](docs/architecture.md) overview;
-3. the [Layer Standard](docs/layer-standard.md);
+3. the [Capability Standard](docs/capability-standard.md);
 4. the cross-cutting baselines: identity, security, privacy, presentation;
 5. a capability's own normative documents;
 6. an application's documents;
@@ -38,7 +38,7 @@ This repository holds only what applies to the whole ecosystem. A capability's c
 |---|---|
 | [Platform Charter](docs/platform-charter.md) | The platform's aims, principles and blueprint review objectives |
 | [Architecture](docs/architecture.md) | The model, invariants, deployment, routes, security and privacy in brief |
-| [Layer Standard](docs/layer-standard.md) | What a layer is, its repository, contracts, manifest, tests, consumption and versioning |
+| [Capability Standard](docs/capability-standard.md) | Capabilities, implementations, repositories, contracts, manifests, testing and consumption |
 | [Identity and Access](docs/identity.md) | Identity, groups, memberships, ownership and authorisation |
 | [Security](docs/security.md) | The security baseline and data-store controls |
 | [Privacy](docs/privacy.md) | Data protection by design |
