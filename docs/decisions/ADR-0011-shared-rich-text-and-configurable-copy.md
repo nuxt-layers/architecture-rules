@@ -4,7 +4,8 @@
 **Date:** 2026-10-21  
 **Amended:** 2026-10-21: plain text is not rich text; `rich-text` is a library, not a layer; the editor is used only where formatting is allowed  
 **Amended and accepted:** 2026-10-22: `ui` draws safe trees; wording keys placed; Profile and Configuration adopt it in their headless releases  
-**Amended:** 2026-10-26: in line with the amended ADR-0009 (layers keep their screens) and content-editor's design
+**Amended:** 2026-10-26: in line with the amended ADR-0009 (layers keep their screens) and content-editor's design  
+**Amended:** 2026-11-13: capability responsibility is separate from implementation and deployment
 
 > **In short:** every piece of copy is data. Plain text is an ordinary string in an ordinary form control. Formatted text is written in one shared format, checked by the layer that stores it, and edited, where a screen wants it, through one editor that offers exactly what the field allows.
 
@@ -64,7 +65,7 @@ Text a person reads is data, never code.
 
 ### 7. Capabilities may depend on stateless libraries
 
-A capability may depend on a `nuxt-layers` library that holds no state, no ports and no screens, such as `rich-text`, as it depends on `zod`. Capabilities still never depend on one another ([ADR-0001](ADR-0001-capability-repositories-and-composition-shells.md)).
+A capability may depend on a `nuxt-layers` library that holds no state, no ports and no screens, such as `rich-text`, as it depends on `zod`. Capabilities MAY require another capability's published contract through a one-way dependency (ADR-0001 and ADR-0016), but MUST NOT import its private implementation, storage or schema. Using a stateless library is a package dependency, not ownership of another capability's rules.
 
 ## Adopting it
 

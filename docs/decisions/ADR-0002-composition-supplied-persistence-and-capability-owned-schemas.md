@@ -2,7 +2,8 @@
 
 **Status:** Accepted  
 **Date:** 2026-10-03  
-**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions
+**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions  
+**Amended:** 2026-11-13: capability responsibility is separate from implementation and deployment
 
 > **In short:** there is no shared persistence layer. The host supplies each capability's database connection; each capability owns its own schema and migrations, fails closed without its connection, and never touches another's schema or a hosting provider's proprietary services.
 
@@ -29,7 +30,7 @@ There is no ecosystem-wide data-access layer. A capability that needs persistenc
 
 ### 2. The composition root supplies the connection
 
-The host application creates and owns database connections (pool lifecycle, credentials, TLS, pooling mode) and supplies them to each capability through that capability's documented provider function, normally from a Nitro server plugin.
+The composition root creates and owns database connections (pool lifecycle, credentials, TLS, pooling mode) and supplies them to each capability through its documented provider function. A Nuxt host normally does this from a Nitro server plugin; a framework-independent consumer uses an equivalent explicit composition call. Neither form changes the capability's persistence ownership or required fail-closed behaviour.
 
 A capability MUST fail closed when a required persistence provider has not been supplied. It MUST NOT silently fall back to an in-memory or file-based store outside explicit test or development configuration.
 

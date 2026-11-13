@@ -1,7 +1,8 @@
 # ADR-0016 — Controlled Layer Specialisation and Composition
 
 **Status:** Accepted  
-**Date:** 2026-11-12
+**Date:** 2026-11-12  
+**Amended:** 2026-11-13: capability responsibility is separate from implementation and deployment
 
 > **In short:** explicit contract dependencies remain the default. Declarative specialisation and deliberate Nuxt Layer `extends` are permitted when they preserve independent capability ownership, public boundaries, security and an acyclic dependency graph. This decision changes no existing capability contract.
 
@@ -32,6 +33,8 @@ Nuxt `extends` merges framework contributions; it is **not** domain inheritance,
 | Declarative specialisation | Greengrocer archetype specialises retail configuration | Schema-validated descriptions and published extension points |
 | Nuxt `extends` | Retail application specialises a reusable presentation/composition shell | Deliberate framework inheritance with documented inherited surface |
 | Integration adapter | Trustpilot connects to Reviews | Provider-neutral public interface; optional external provider |
+
+Declarative specialisation is independent of implementation technology: published extension points MAY be evaluated by a framework-independent capability. Nuxt `extends` is available only to Nuxt implementations and does not make Nuxt a prerequisite for a capability. All specialisations retain their owner's validation, authorisation and business invariants.
 
 Prefer composition and explicit public contracts to long inheritance chains. Nuxt `extends` is not the default mechanism for domain-to-domain integration.
 

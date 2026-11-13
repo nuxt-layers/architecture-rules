@@ -4,7 +4,8 @@
 **Date:** 2026-10-21  
 **Amended and accepted:** 2026-10-22: no screen exceptions for sign-in or step-up; client helpers and protocol endpoints named; wording keys, theme authority and person names placed; screens removed only once replaced  
 **Amended:** 2026-10-22: `ui` offers styled, customisable components; kits are named `<capability>-ui`; composition kits and the host's part defined  
-**Amended:** 2026-10-25: a layer's core stays headless, but the layer may ship an optional presentation part for its own screens; kits become optional; existing layers retain their screens
+**Amended:** 2026-10-25: a layer's core stays headless, but the layer may ship an optional presentation part for its own screens; kits become optional; existing layers retain their screens  
+**Amended:** 2026-11-13: capability responsibility is separate from implementation and deployment
 
 > **In short:** a capability layer's core does the work and never depends on screens. A layer may also ship its own screens as an optional, separable part, drawn only with Theme Manager's vocabulary, which a host uses, overrides or switches off. Whoever composes it decides.
 
@@ -18,7 +19,7 @@ The 2026-10-22 decision went further and removed every screen from every layer, 
 
 ## The decision
 
-Every capability layer, whether foundation, platform or domain, has a **headless core**, and may have an **optional presentation part**.
+Every Nuxt capability layer, whether foundation, platform or domain, has a **headless core**, and may have an **optional presentation part**. A capability implemented without Nuxt exposes its headless behaviour through its public contract and needs no artificial Nuxt presentation part or Nuxt runtime. If a separate Nuxt adapter or presentation is supplied, that contribution follows the presentation and security rules in this ADR. No existing layer's screens are moved by this clarification.
 
 | The headless core offers | The core never offers or depends on |
 |---|---|
