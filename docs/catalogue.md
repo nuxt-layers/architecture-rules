@@ -4,14 +4,14 @@
 
 ## Governing rules
 
-1. Each layer implements one cohesive bounded capability, classified as Foundation, Platform or Domain, with a headless core and an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)).
-2. Applications are thin composition roots, supplying infrastructure, configuration, routing and deployment choices ([ADR-0001](decisions/ADR-0001-capability-repositories-and-composition-shells.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)).
+1. Each capability owns a cohesive responsibility, classified as Foundation, Platform or Domain, independently of framework or deployment (ADR-0001). Nuxt capability layers retain headless cores and optional presentation under [ADR-0009](decisions/ADR-0009-headless-capability-layers.md).
+2. Applications are thin composition roots, supplying infrastructure, configuration, routing and deployment choices. Framework-independent capabilities use documented independent consumers; Nuxt adapters retain ADR-0012's host budget ([ADR-0001](decisions/ADR-0001-capability-repositories-and-composition-shells.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)).
 3. Contract dependencies and direct Nuxt extension edges are explicitly declared, directed and jointly acyclic. Service use is through public contracts and host-supplied ports; deliberate schema-validated archetype specialisation and Nuxt extension of documented public contributions are permitted under [ADR-0016](decisions/ADR-0016-controlled-layer-specialisation-and-composition.md). No extension implies access to private source.
 4. Stateful capabilities own their persistence ports, schemas, migrations and any other stores ([ADR-0002](decisions/ADR-0002-composition-supplied-persistence-and-capability-owned-schemas.md), [ADR-0006](decisions/ADR-0006-polyglot-persistence-and-data-store-security.md)). No shared persistence service is permitted, and required persistence fails closed when its provider is absent.
 5. Identity owns users, groups, the single-parent group hierarchy and memberships; Profile owns personal data; Authentication owns sessions; Authorisation owns access decisions. Every human identity has one system-managed personal group.
 6. Every protected operation is authorised on the server. Security follows OWASP ASVS 5.0 Level 2, with applicable Level 3 controls for security-sensitive operations.
 7. Presentation meets WCAG 2.2 AA, supports internationalisation and uses Theme Manager's semantic vocabulary. Privacy, data minimisation, retention and consent apply across capabilities.
-8. Separate deployment is optional; the default architecture is a modular monolith.
+8. Separate deployment is optional; the default architecture is a modular monolith. Capability ownership, implementation and deployment are distinct; refer to the [Capability Standard](capability-standard.md).
 
 ## Capabilities
 
