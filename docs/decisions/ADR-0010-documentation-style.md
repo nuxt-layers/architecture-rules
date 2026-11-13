@@ -5,9 +5,10 @@
 **Accepted:** 2026-10-22  
 **Amended:** 2026-10-25: documents that stay true without upkeep; one file for external links, one for plans  
 **Amended:** 2026-10-26: `CONTRACT.md` listed with the other files; `RESOURCES.md` and `PLAN.md` at the repository root; the documentation style standard folded in  
-**Amended:** 2026-11-04: an application's `RESOURCES.md` also records its hosting and storage providers (ADR-0014)
+**Amended:** 2026-11-04: an application's `RESOURCES.md` also records its hosting and storage providers (ADR-0014)  
+**Amended:** 2026-11-13: use conventional summaries only where useful
 
-> **In short:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Verified external reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
+> **Summary:** every document should be quick to read and hard to misread, and should stay true without being edited. Brevity comes first. Verified external reference pins and changing status stay in their designated files; live development dependencies follow ADR-0008.
 
 ## Why
 
@@ -19,7 +20,7 @@ Every document in the ecosystem follows these rules:
 
 | Rule | In practice |
 |---|---|
-| **Summary first** | Open with a one-line *In short* |
+| **Summary first** | Begin substantial documents with a brief **Summary** stating their purpose or main conclusion; omit it when the document is already sufficiently short |
 | **Brevity** | Cut every word that does not change the meaning |
 | **Plain language** | Everyday words; a term or piece of jargon is explained where it first appears |
 | **Say it once** | Every rule a reader needs is stated once, in one place; elsewhere, link to it |
@@ -30,7 +31,7 @@ Every document in the ecosystem follows these rules:
 | **Bold for key terms** | Sparingly, so the eye can scan |
 | **British spelling** | Throughout |
 
-An ADR reads in this order: *In short*, **Why**, **The decision**, **Adopting it**, **What follows** (gains and costs, as a table), and **Guardrails** where needed.
+An ADR reads in this order: **Summary**, **Why**, **The decision**, **Adopting it**, **What follows** (gains and costs, as a table), and **Guardrails** where needed. Omit the summary if it adds nothing.
 
 ### Documents that stay true
 
