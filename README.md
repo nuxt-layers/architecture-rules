@@ -36,6 +36,7 @@ This repository holds only what applies to the whole ecosystem. A capability's c
 
 | Document | Covers |
 |---|---|
+| [Platform Charter](docs/platform-charter.md) | The platform's aims, principles and blueprint review objectives |
 | [Architecture](docs/architecture.md) | The model, invariants, deployment, routes, security and privacy in brief |
 | [Layer Standard](docs/layer-standard.md) | What a layer is, its repository, contracts, manifest, tests, consumption and versioning |
 | [Identity and Access](docs/identity.md) | Identity, groups, memberships, ownership and authorisation |
