@@ -1,6 +1,6 @@
 # Architecture
 
-> **In short:** the ecosystem is bounded capabilities, built as Nuxt Layers, composed into light applications. Each capability owns its data and rules and offers a public contract; applications choose capabilities, pass what they already own and draw what is theirs. Dependencies run one way, security is enforced on the server, and the default is one deployable application. What a layer is and how it is built is in the [Layer Standard](layer-standard.md).
+> **Summary:** capabilities own defined responsibilities and publish contracts; Nuxt Layers and framework-independent packages may implement them. Applications compose capabilities without access to private implementation. Dependencies run one way, security stays on the server, and the default is a modular monolith. See the [Capability Standard](capability-standard.md).
 
 **Status:** Normative
 
@@ -8,16 +8,18 @@
 
 | Part | Does |
 |---|---|
-| **Capabilities** | Own one bounded responsibility each, with a headless core and an optional presentation part ([ADR-0009](decisions/ADR-0009-headless-capability-layers.md)). Classified Foundation, Platform or Domain |
-| **Presentation layers and stateless libraries** | Draw screens over capabilities' contracts, or provide stateless shared formats such as `rich-text` (ADR-0011) |
+| **Capabilities** | Own bounded responsibilities, state and rules through published contracts; implementation and deployment are separate decisions (ADR-0001). Classified Foundation, Platform or Domain |
+| **Nuxt Layers and presentation** | Integrate capability services into Nuxt, with optional separable screens where applicable (ADR-0009); presentation contributions own no domain state |
+| **Framework-independent capabilities** | Implement public business or platform contracts without requiring Nuxt; may expose a Nuxt adapter (ADR-0001, ADR-0012) |
+| **Stateless libraries** | Provide reusable stateless functionality such as `rich-text` without owning a capability (ADR-0011) |
 | **Infrastructure integration libraries** | Framework-independent packages for shared external-system integration, such as `temporal-gateway`; not Nuxt Layers or business capabilities ([ADR-0015](decisions/ADR-0015-infrastructure-integration-libraries.md)) |
 | **Suites** | Capabilities designed together, such as the IAM suite, wired once by their integration package ([ADR-0005](decisions/ADR-0005-iam-suite.md), [ADR-0012](decisions/ADR-0012-trivial-composition.md)) |
 | **Applications** | Composition roots: select the latest accepted development revisions, pass connections, secrets, configuration and application decisions, set routes and branding, and deploy. Domain behaviour never defaults to the application |
 
 ## 2. Invariants
 
-1. A capability layer is a bounded capability, not a convenient collection of files. Stateless libraries and infrastructure integration libraries are separate package kinds (ADR-0011, ADR-0015).
-2. Layers interact only through declared public contracts, ports and events, never another layer's private code, storage or schema.
+1. A capability is defined by its bounded responsibility and public contract, not by its framework, repository or deployment. Stateless libraries and infrastructure integration libraries remain distinct (ADR-0001, ADR-0011, ADR-0015).
+2. Capabilities interact only through declared public contracts, ports and events, never another capability's private code, storage or schema.
 3. Dependencies form a directed acyclic graph, counting both public-contract dependencies and direct Nuxt extension edges. If two capabilities seem to need each other, move the shared contract to a boundary, use an event or port, or redraw the boundary (ADR-0016).
 4. A dependency targets a capability's contract, not how it is built or deployed: a capability needing access decisions asks for the shared `decide` shape, and the deciding capability learns nothing of its internals.
 5. Prefer contract-based composition to inheritance. A layer MAY deliberately specialise a published extension surface or use Nuxt `extends` for documented configuration/presentation/composition reuse under [ADR-0016](decisions/ADR-0016-controlled-layer-specialisation-and-composition.md). This never grants access to private capability internals or transfers domain ownership. The host still composes capability ports within ADR-0012's budget.
@@ -26,7 +28,7 @@
 8. Every persistent resource needing isolation has explicit ownership and access rules.
 9. Infrastructure is replaceable through ports where practical. Capabilities depend on their own stores, not a hosting vendor's API. PostgreSQL is the preferred relational database; row-level security may add protection but never replaces application authorisation.
 10. Security, privacy, accessibility and internationalisation are designed in from the start, never added late.
-11. A capability declares what it provides and requires, with optional dependencies marked and behaviour without them documented. Any deliberate Nuxt extension relationship is separately declared and tested under ADR-0016. Its failures are documented codes; internal exceptions never cross a boundary.
+11. A capability declares what it provides and requires, with optional dependencies marked and behaviour without them documented. Nuxt layers retain `capability.json`; other packages document their contracts and exports without an imposed universal manifest (Capability Standard §4). Deliberate Nuxt extension edges are separately declared and tested under ADR-0016. Failures are documented codes; internal exceptions never cross a boundary.
 
 ## 3. Deployment
 

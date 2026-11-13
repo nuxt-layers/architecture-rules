@@ -11,7 +11,7 @@
 
 This repository holds the ecosystem's normative architecture. As capabilities are designed, there is pressure to place their detailed specifications here too: data models, contracts, process steps and threat models. Doing so would mix ecosystem-wide rules with capability-specific detail, duplicate what capability repositories already document, and let the two drift apart.
 
-Capability repositories already maintain their own contract, threat model and plan ([Layer Standard](../layer-standard.md) §3). Several capabilities also form suites whose processes span more than one of them, such as the Identity and Access Management (IAM) suite.
+Capability repositories already maintain their own contract, threat model and plan ([Capability Standard](../capability-standard.md) §3). Several capabilities also form suites whose processes span more than one of them, such as the Identity and Access Management (IAM) suite.
 
 ## The decision
 
