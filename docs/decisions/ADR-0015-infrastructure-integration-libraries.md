@@ -7,7 +7,7 @@
 
 ## Why
 
-ADR-0011 permits small stateless libraries such as `rich-text`, while the Layer Standard describes Nuxt capability layers and those libraries. Some infrastructure integrations need more than stateless formatting functions: connection lifecycles, validated credentials, external SDK adaptation and independently deployed worker support. Duplicating these concerns in Scheduler, Workflow and other capabilities would create inconsistent integrations.
+ADR-0011 permits small stateless libraries such as `rich-text`, while the Capability Standard describes Nuxt capability layers and those libraries. Some infrastructure integrations need more than stateless formatting functions: connection lifecycles, validated credentials, external SDK adaptation and independently deployed worker support. Duplicating these concerns in Scheduler, Workflow and other capabilities would create inconsistent integrations.
 
 The proposed `temporal-gateway` is such an integration. It is a reusable TypeScript package wrapping selected Temporal SDK operations, not a new business capability. Treating it as a Nuxt Layer would incorrectly require a Nuxt entry point and capability manifest; treating it as an ADR-0011 stateless library would misdescribe its lifecycle responsibilities.
 
@@ -22,7 +22,7 @@ The proposed `temporal-gateway` is such an integration. It is a reusable TypeScr
 
 ## Adopting it
 
-The Layer Standard and Architecture overview distinguish infrastructure integration libraries from Nuxt capability layers and ADR-0011 stateless libraries. The Capability Catalogue lists integration libraries separately from capabilities. The `temporal-gateway` repository implements the first instance of this kind; its own `CONTRACT.md` sets the detailed Temporal API, not this ADR.
+The Capability Standard and Architecture overview distinguish infrastructure integration libraries from Nuxt capability layers and ADR-0011 stateless libraries. The Capability Catalogue lists integration libraries separately from capabilities. The `temporal-gateway` repository implements the first instance of this kind; its own `CONTRACT.md` sets the detailed Temporal API, not this ADR.
 
 ## What follows
 
