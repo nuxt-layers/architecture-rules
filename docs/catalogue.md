@@ -77,7 +77,7 @@ The optional **Trustpilot adapter** belongs under `integrations` (conceptually `
 
 An organisational archetype MAY describe metadata schemas, positions, requested role profiles, typed reporting relationships and capability configuration. It MUST NOT become a second Identity group hierarchy, directly grant access, assert asset permissions, or absorb independent domain lifecycles. Permission profiles are requests interpreted under existing Authorisation and domain policies. Reporting relationships are not access-control inheritance.
 
-`organisation`, `business`, `company`, `club`, `committee`, `department` and `office` remain candidates until independent state and lifecycle justify distinct domain owners; otherwise they may be archetypes, application compositions or specialised presentation over existing contracts. Legal-entity registration, committee decisions and other independently regulated lifecycles are examples that might justify distinct domains, not generic metadata fields.
+`organisation`, `business`, `company`, `club`, `committee`, `department` and `office` are **organisational archetypes or application compositions by default**, not seven independent capability candidates. They describe a group's purpose, type, configuration or presentation through published contracts; they never duplicate Identity's groups, membership or hierarchy. A separate domain is justified only by demonstrably independent durable records, governance rules and lifecycle, such as legal-entity filings, formal committee decisions or facility management. Such domain ownership requires its own review rather than following automatically from an organisational label.
 
 ### Relationship vocabulary
 
@@ -117,17 +117,24 @@ These names and descriptions are **design options**, not approved independent re
 | `task` | Platform candidate | Individual assigned work, goals, progress and due dates; not Temporal jobs or scheduler triggers |
 | `booking` | Domain candidate | Reservation lifecycle, availability and capacity for resources; neither a clock nor execution scheduler |
 
-### Organisational and activity domain candidates
+### Organisational archetype and composition examples
+
+The following are **types and compositions**, not independent capability candidates merely by their names. They use existing Identity-owned group IDs and membership relationships. Validated metadata, presentation, configuration and optional domain services may specialise each type through published contracts (ADR-0016). No type grants permissions or introduces an alternative group hierarchy.
+
+| Archetype or composition | Intended use and independent-domain exclusion |
+|---|---|
+| `organisation` | General organisational context and type; separate legal/governance records require a justified domain owner |
+| `business` | Organisation-oriented business application composition; commerce, accounting and other operations retain their own domain owners |
+| `company` | Organisation type with legal-entity references; statutory registration, officers or filings may warrant a separately reviewed domain |
+| `club` | Group type for a club with selected activity capabilities; paid scheme rights and subscriptions are not Identity membership |
+| `committee` | Group type and meeting composition; formal votes, resolutions and minutes may warrant their own independently governed lifecycle |
+| `department` | Organisational unit type, potentially expressed through Identity's existing single-parent group hierarchy; reporting does not grant access |
+| `office` | Organisational location/unit type; physical facilities, leases and managed assets belong to independently justified domain owners |
+
+### Activity domain candidates
 
 | Candidate | Potential bounded responsibility / disposition |
 |---|---|
-| `organisation` | Organisational archetype unless independent governance data/lifecycle justify domain ownership |
-| `business` | Business-operations composition/archetype; not a duplicate Identity hierarchy |
-| `company` | Company/legal-entity-specific records and lifecycle only when independent of general organisation model |
-| `club` | Club policies and specialist activities; common membership remains in Identity |
-| `committee` | Committee decisions, votes and minutes where independently governed; otherwise archetype |
-| `department` | Organisational unit type and operational metadata, not a second group tree |
-| `office` | Organisational location/resource role; not a duplicate location or asset service |
 | `membership` | Paid/scheme membership rights, terms, renewals and benefits; NOT Identity's existing group membership |
 | `events` | Planned participant activities and event lifecycle; not background scheduled tasks |
 | `course` | Structured learning offering and outcomes |
