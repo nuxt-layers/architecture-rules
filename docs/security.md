@@ -192,7 +192,7 @@ Each capability MUST document, in its contract, every store it uses:
 Each capability's threat model and control register MUST reference this standard and record, per store, the evidence for §16.2 to §16.6. Tests use disposable local instances of each store, as ADR-0002 requires for PostgreSQL.
 
 
-## 18. Tenant governance, delegated administration and recovery (ADR-0017/ADR-0018)
+## 17. Tenant governance, delegated administration and recovery (ADR-0017/ADR-0018)
 
 Tenant parentage, application/platform administration, an organisational role, creation, payment and subscription rights MUST NOT silently confer access to another tenant's resources. Every authorised cross-tenant administrative action requires explicit scope, risk-appropriate assurance, expiry/revocation and attributable records. Routine platform operator access must not act as permanent unrestricted 'god-user' customer access; privileged bootstrap and break-glass procedures remain separate and protected.
 
