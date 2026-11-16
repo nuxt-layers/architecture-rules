@@ -2,7 +2,8 @@
 
 **Status:** Accepted  
 **Date:** 2026-10-08  
-**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions
+**Amended:** 2026-10-26: brought in line with ADR-0010 and later decisions  
+**Supplemented:** 2026-11-16: ADR-0017 separately establishes tenant parentage and digital tenant governance; group invariants remain unchanged
 
 > **In short:** the group model's invariants are normative across capabilities that use identities, groups and memberships.
 
@@ -28,4 +29,4 @@ The group model is a shared boundary; capability-specific implementation and dev
 ## Guardrails
 
 - Changes to the group model's invariants require a new ADR.
-- Tenant provisioning and lifecycle remain a candidate `tenancy-service`; until one exists, tenants are supplied through Identity and the composition root.
+- Tenant records, provenance and governance are owned by Identity; the host/composition root coordinates secure provisioning through documented public boundaries. [ADR-0017](ADR-0017-tenant-hierarchy-and-accountable-digital-control.md) adds a separately scoped tenant hierarchy and accountable tenant digital ownership, **not** a second group forest or an independently approved `tenancy-service`. The accepted group founding-owner, hierarchy and membership invariants remain unchanged.
