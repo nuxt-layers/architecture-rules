@@ -198,3 +198,12 @@ A repository is created only once these are established:
 8. independent contract, integration and consumer acceptance tests.
 
 The group model is defined in [Identity and Access](identity.md) ([ADR-0003](decisions/ADR-0003-group-model-and-identity-first.md)).
+
+
+## Tenant governance, policy authority and commercial onboarding (ADR-0017/ADR-0018)
+
+The Identity-owned **tenant hierarchy** is distinct from its accepted single-parent **group hierarchy**. Tenant parentage allows only specifically authorised, scoped administration and never transfers access to child private data, Identity membership, commercial billing responsibility, group ownership or domain source authority. Active tenants require verified accountable human digital governance; creator provenance, real-world controlling legal entity, director/shareholder, delegated administrator and payer remain distinct. Protected transfer, recovery and portability follow [ADR-0017](decisions/ADR-0017-tenant-hierarchy-and-accountable-digital-control.md). These are **new target contract obligations**, not claims about current Identity APIs.
+
+Policy categories remain separate: immutable architectural/security constraints (enforced by responsible owners), scoped Configuration values, organisational governance rules, domain business rules, qualified Legal Compliance and Privacy constraints, authoritative governing instruments, and Publisher-managed policy documents. No generic `policies` service is created; published statements do not constitute executable controls or legal proof. See [ADR-0018](decisions/ADR-0018-policy-governance-and-commercial-entitlements.md).
+
+The host's operating company is an ordinary scoped commercial tenant/business party; the installation is not itself a tenant. Modular paid tenant onboarding composes Product/Pricing, Order, Payment Gateway, Subscription, Billing, Invoice, Accounting, Identity, Configuration, Authorisation, Workflow and relevant resource owners via public boundaries. **Entitlement, provisioning, enablement and individual permission are independent.** Logical purchased tenant image/file storage quota must be demonstrably enforced before advertised; Storage's existing usage report alone does not enforce a quota. Bill-to party and consuming tenant may differ with proper authority. `business`, `organisation`, `club`, `company` and `committee` remain archetypes/compositions absent independent domain authority; no new `tenancy` capability is inferred by tenant-tree requirements.
