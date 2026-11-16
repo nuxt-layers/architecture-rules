@@ -190,3 +190,12 @@ Each capability MUST document, in its contract, every store it uses:
 ### 16.7 Verification
 
 Each capability's threat model and control register MUST reference this standard and record, per store, the evidence for §16.2 to §16.6. Tests use disposable local instances of each store, as ADR-0002 requires for PostgreSQL.
+
+
+## 18. Tenant governance, delegated administration and recovery (ADR-0017/ADR-0018)
+
+Tenant parentage, application/platform administration, an organisational role, creation, payment and subscription rights MUST NOT silently confer access to another tenant's resources. Every authorised cross-tenant administrative action requires explicit scope, risk-appropriate assurance, expiry/revocation and attributable records. Routine platform operator access must not act as permanent unrestricted 'god-user' customer access; privileged bootstrap and break-glass procedures remain separate and protected.
+
+Every active tenant requires verified accountable human digital governance, with at least one active owner. Normal last-owner removal must be refused; exceptional loss triggers restricted independently reviewed recovery, not an arbitrary new owner. Contested recovery requires legitimate authority evidence, anti-fraud assessment, appropriate step-up/independent approval, notifications and Audit evidence. Actor and policy version provenance must prevent an administrator weakening an ownership-transfer rule and exploiting that weaker rule immediately. Domain-owned portable exports remain subject to privacy, security, legal holds and scope checks. See [ADR-0017](decisions/ADR-0017-tenant-hierarchy-and-accountable-digital-control.md).
+
+Security policy decisions MUST preserve non-configurable floors, source and effective versions, permitted changes, conflict/unknown states and owning enforcement. Pricing/Subscription entitlements and technical resource provision are distinct from Authorisation decisions and must not bypass access checks. Unknown payment/provisioning/required quota-policy outcomes MUST NOT be represented as successful or safe. See [ADR-0018](decisions/ADR-0018-policy-governance-and-commercial-entitlements.md).
