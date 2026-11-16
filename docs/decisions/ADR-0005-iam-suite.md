@@ -3,7 +3,8 @@
 **Status:** Accepted  
 **Date:** 2026-10-09  
 **Amended:** 2026-10-23: suite documentation allocated to `iam-integration` (§3)  
-**Amended:** 2026-10-31: removed unavailable external document references
+**Amended:** 2026-10-31: removed unavailable external document references  
+**Supplemented:** 2026-11-16: ADR-0017 adds distinct tenant governance, without altering group ownership or the IAM member boundaries
 
 > **In short:** five capabilities form the IAM suite, meeting only through contracts and ports: Authentication, Identity, Profile, Authorisation and `iam-integration`. Ten suite-wide invariants, from self-sovereignty to durable events, bind them all.
 
@@ -59,4 +60,4 @@ Following [ADR-0004](ADR-0004-documentation-placement.md), the suite architectur
 
 - A member that stores personal data outside Profile, or imports another member, fails review.
 - Changes to these invariants require a new ADR.
-- Tenant provisioning remains a candidate `tenancy-service`; until it exists, Identity holds tenants.
+- Tenant records and governance remain Identity-owned; the composition root securely orchestrates authorised provisioning. [ADR-0017](ADR-0017-tenant-hierarchy-and-accountable-digital-control.md) establishes a distinct tenant tree and accountable human tenant-owner invariants without an independently approved `tenancy-service`. The founding **group** owner requirement in §2 remains unchanged and must not be treated as proof of legal-company authority or automatic tenant-wide permissions.
