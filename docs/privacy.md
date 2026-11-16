@@ -45,7 +45,7 @@ The architecture SHOULD support access and export, correction, erasure, retentio
 Privacy and security overlap, but they are not the same. Authorisation controls who can access data. Privacy also asks whether the data should be collected, processed, retained, disclosed or transferred at all.
 
 
-## 8. Governance evidence and policy documents (ADR-0017/ADR-0018)
+## 9. Governance evidence and policy documents (ADR-0017/ADR-0018)
 
 Data about directors, shareholders, controllers, administrators, disputed owner claims or recovery approvals is personal data where it relates to identifiable individuals. Every affected owner SHALL purpose-limit, minimise, protect, retain and disclose that evidence according to verified lawful grounds and applicable holds. A claimant's company role alone is not a grant to disclose another subject's identity or company resources; independent recovery and portable export MUST respect affected individuals' rights and applicable third-party restrictions.
 
