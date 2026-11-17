@@ -106,7 +106,7 @@ These names and descriptions are **design options**, not approved independent re
 | `uuidv7-generator` | Library candidate | UUIDv7 identifier generation; not ownership of entities or credentials, and not automatically a Nuxt Layer |
 | `api-gateway` | Composition / platform to decide | External API routing and exposure; not a replacement for capability APIs or server authorisation |
 | `application-compositions` | Composition artefacts | Reusable application templates and selected capability wiring; generally not independent stateful services |
-| `company-console` | Presentation | Cross-capability management screens; no business records |
+| `organisation-console` | Presentation / application composition (independent packaging under review) | Organisation-neutral, role-aware context selection, management dashboards and navigation over owning capabilities' public contracts; no independent business records, tenant authority or access grants; distinct from platform-operator administration |
 | `user` | Presentation | Group-scoped user administration screens via Identity/Profile/Authorisation; no user records |
 | `document` | Platform candidate, unresolved | Distinct document-management requirement only if Publisher's document lifecycle is insufficient |
 | `search` | Platform | Indexing, query and relevance over authorised source records; no source-of-truth storage |
