@@ -103,7 +103,7 @@ These names and descriptions are **design options**, not approved independent re
 | `caching` | Foundation | Cache provider ports, expiration and invalidation; source capabilities remain authoritative |
 | `logging` | Foundation | Structured technical logs, correlation and sinks; not the authoritative business audit trail |
 | `observability` | Platform | Metrics, traces, system health and diagnostics; not logging or business auditing |
-| `uuidv7-generator` | Library candidate | UUIDv7 identifier generation; not ownership of entities or credentials, and not automatically a Nuxt Layer |
+| `UUID-generator` | Library candidate | Shared UUID generation, including UUIDv7; replaces retired `uuidv7_generator` / `uuidv7-generator` concept without owning entities or credentials, and does not automatically require a Nuxt Layer |
 | `api-gateway` | Composition / platform to decide | External API routing and exposure; not a replacement for capability APIs or server authorisation |
 | `application-compositions` | Composition artefacts | Reusable application templates and selected capability wiring; generally not independent stateful services |
 | `organisation-console` | Presentation / application composition (independent packaging under review) | Organisation-neutral, role-aware context selection, management dashboards and navigation over owning capabilities' public contracts; no independent business records, tenant authority or access grants; distinct from platform-operator administration |
