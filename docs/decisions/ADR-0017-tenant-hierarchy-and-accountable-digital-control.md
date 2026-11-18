@@ -1,6 +1,6 @@
 # ADR-0017 — Tenant Hierarchy and Accountable Digital Control
 
-**Status:** Proposed for acceptance in this PR (normative only when merged)  
+**Status:** Accepted  
 **Date:** 2026-11-16  
 **Amends:** ADR-0003 and ADR-0005 on **tenant** governance; preserves their **group** invariants.  
 **Review evidence:** [Blueprint PR #39](https://github.com/nuxt-layers/architecture-blueprint-review/pull/39), including `proposals/organisational-tenancy-and-governance.md` and `reviews/organisational-ownership-and-recovery.md` on merged `master`.
@@ -26,7 +26,7 @@ One person can establish several businesses, join a club and a council, and admi
 
 Identity's public contract must eventually document create/provision/request, describe, parent/reparent, owners/transfer, recovery/exception, revoke, close and export operations with trusted subject/tenant context, state/effective version, refusal codes and audit/outbox semantics. Cross-tenant delegated authority belongs to Authorisation's documented decision/grant boundary. The host resolves effective tenant from trusted context and never treats browser-submitted IDs as permissions. IAM integration handles verified workflow handoffs without persisting duplicate principals/tenants.
 
-**Do not infer these APIs already exist.** Current `nuxt-layers/identity/CONTRACT.md` exposes privileged host tenant/root-group provisioning and group ownership, not this proposed tenant tree and verified-tenant-owner lifecycle.
+**Do not infer these APIs already exist.** Current `nuxt-layers/identity/CONTRACT.md` exposes privileged host tenant/root-group provisioning and group ownership, not the tenant tree and verified-tenant-owner lifecycle required by this accepted decision.
 
 ## Required conformance evidence
 
