@@ -1,6 +1,6 @@
 # ADR-0018 — Policy Authority, Governance and Commercial Entitlements
 
-**Status:** Proposed for acceptance in this PR (normative only when merged)  
+**Status:** Accepted  
 **Date:** 2026-11-16  
 **Review evidence:** [Blueprint PR #39](https://github.com/nuxt-layers/architecture-blueprint-review/pull/39), especially `proposals/policy-and-governance-boundaries.md` and `proposals/commercial-onboarding-and-entitlements.md`. Complements ADR-0017; does not replace ADR-0012/0016.
 
