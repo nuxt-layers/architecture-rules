@@ -99,6 +99,12 @@ Independently developed packages retain applicable root documents:
 
 Longer specifications and threat models belong under `docs/`. Security-critical packages maintain the required threat model and control evidence. Documentation follows ADR-0004 and ADR-0010.
 
+### Canonical capability documentation
+
+**Each capability record must present one coherent, current specification.** Relevant approved decisions, cross-capability interactions and use cases must be integrated into their appropriate sections. Superseded, contradictory, redundant and irrelevant material must be removed. Historical evolution is preserved through version control and decision records, not accumulated within the canonical capability specification.
+
+Preserve the **substance and status** of accepted decisions; resolve contradictions against governing architecture instead of deleting valid authoritative requirements. Existing templates or pro-forma headings may be reorganised or removed when they no longer serve the current specification. The document must still cover the capability's required identity, ownership, inputs, outputs, dependencies, security, operational behaviour, GUI/headless needs and unresolved decisions. This applies to blueprint capability records as well as maintained capability specifications; it does not authorise rewriting previously accepted ADRs or deleting another active review's unmerged work.
+
 Packages use the `@nuxt-layers/` scope where applicable and declare every imported dependency. Public entry points and compatibility requirements must be explicit. The repository's default branch is protected; material changes use pull requests.
 
 ## 4. Manifest and discoverability
